@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name_xian" translatable="false">丐帮</string>
+    <string name="Stringshanping" translatable="false">赚小费，上丐帮APP</string>
+    <string name="intomain" translatable="false">进入主页</string>
+    <string name="into" translatable="false">into</string>
+    <string name="know_sex" translatable="false">记住密码</string>
+    <string name="rest" translatable="false">注册成功</string>
+    <string name="item_id_out" translatable="false">登出</string>
+    <string name="item_id_in" translatable="false">登录</string>
+    <string name="user" translatable="false">电话</string>
+    <string name="password" translatable="false">密码</string>
+    <string name="Success" translatable="false">login success</string>
+    <string name="time" translatable="false">2019.1.1  19:00:00</string>
+    <string name="out_state" translatable="false">已完成</string>
+    <string name="confirm" translatable="false">确认</string>
+    <string name="register" translatable="false">注册</string>
+    <string name="phone" translatable="false">手机号</string>
+    <string name="forget" translatable="false">忘记密码？</string>
+    <string name="switch_login" translatable="false">Switch</string>
+    <string name="share" translatable="false">分享</string>
+    <string name="search" translatable="false">搜索</string>
+    <string name="myself" translatable="false">个人</string>
+    <string name="test" translatable="false">测试</string>
+
+
+    <string name="sure" translatable="false">确定</string>
+    <string name="title_activity_scrolling" translatable="false" >下单页面</string>
+
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="addbill" translatable="false">下单</string>
+    <string name="address" translatable="false">地址</string>
+    <string name="add_address_by" translatable="false">定位</string>
+    <string name="message" translatable="false">备注</string>
+    <string name="money" translatable="false">基础服务费用：50元</string>
+    <string name="start" translatable="false">开始体验</string>
+    <string name="hello_there" translatable="false">Hello Human</string>
+    <string name="open" translatable="false">SEE ALL</string>
+    <string name="title">标题</string>
+    <string name="item">金山银山不如绿水青山</string>
+
+</resources>

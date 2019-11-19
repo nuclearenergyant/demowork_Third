@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.weige.UI">
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取Log -->
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory=""
+        android:icon="@drawable/logo2"
+        android:label="@string/app_name_xian"
+        android:roundIcon="@drawable/logo2"
+        android:supportsRtl="true"
+        android:theme="@style/MyAppThemeDemo"
+        tools:replace="android:appComponentFactory">
+
+
+        <!-- 每个app拥有自己单独的定位service -->
+        <service android:name="com.amap.api.location.APSService"/>
+        <!-- =有加入key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="7f0fe6bd80e89c108935105646dcb2df" />
+
+
+        <!--下单页面-->
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/MyAppThemeDemo.NoActionBar2"></activity>
+
+        <!--注册页面-->
+        <activity
+            android:name=".RegisterActivity"
+            android:label="注册"
+            android:theme="@style/NOActionFillscreen"/>
+        <!-- 登录界面 -->
+        <activity
+            android:name=".LoginActivity"
+            android:label="登录"
+            android:theme="@style/NOActionFillscreen"/>
+        <!-- 闪屏 -->
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/NOActionFillscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 引导页 -->
+        <activity
+            android:name=".GuigeActivity"
+            android:theme="@style/NOActionFillscreen" >
+
+        </activity>
+        <!-- 设置页面 -->
+        <activity android:name=".SettingActivity"
+            android:theme="@style/NOActionFillscreen"/>
+        <!-- 主屏页面 -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/MyAppThemeDemo" >
+
+        </activity>
+        <!--修改密码-->
+        <activity android:name=".ForgetPassword"
+            android:label="修改密码"
+            android:theme="@style/NOActionFillscreen"/>
+    </application>
+
+</manifest>

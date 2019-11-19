@@ -1,0 +1,35 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        //bmob
+        jcenter()
+        //高级TOAST
+        maven { url 'https://jitpack.io' }
+
+    }
+    dependencies {
+        //bmob
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+allprojects {
+    repositories {
+        google()
+
+        /*高德地图*/
+        jcenter()
+
+
+        //设置阴影
+        maven { url 'https://jitpack.io'}
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+<!--    <color name="colorL">#FFFBE6</color>-->
+    <color name="colorL4">#03E0F4</color>
+    <color name="colorL2">#E91E63</color>
+    <color name="colorL3">#2F8D2F2F</color>
+    <color name="colorText">#356859</color>
+    <color name="colorText2">#E029302E</color>
+    <color name="textColorPrimary">#356859</color> //默认文字主题颜色
+    <color name="colorCircleText">#F1BA26</color>
+    <color name="transparent">#ee222222</color>
+    <color name="colorSearchView">#4e6162</color>
+    <color name="colorL">#FFFAFA</color>
+    <color name="blue">#0336FF</color>
+</resources>

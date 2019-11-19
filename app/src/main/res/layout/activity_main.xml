@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/mTablayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/colorL"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="#E029302E"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="#FF356859"
+                app:tabTextColor="#2E29302E" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/myviewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:addStatesFromChildren="false"
+                android:alwaysDrawnWithCache="false"
+                android:animateLayoutChanges="false"
+                android:animationCache="true"
+                android:backgroundTintMode="multiply"
+                android:clickable="false">
+
+            </androidx.viewpager.widget.ViewPager>
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/shezhi" />
+
+        <Button
+            android:id="@+id/add_bill"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/demo_bg"
+            android:text="@string/addbill"
+            android:typeface="serif"
+            android:textColor="@color/colorText"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>
