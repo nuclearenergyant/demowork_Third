@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+//设置页面的优化
 public class SettingView extends ViewGroup {
     private Context mContext;
     private ListView mListView;

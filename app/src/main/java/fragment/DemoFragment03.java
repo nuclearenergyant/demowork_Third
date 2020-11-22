@@ -99,40 +99,6 @@ public class DemoFragment03 extends Fragment {
                 }
             }
         } ).start();
-//        L.i( "订单的数量为："+bills_list.size());
-//        String find_all_Bill= APITOALIYUN.IP_address_check_bill+"UserID="+APITOALIYUN.id;
-//        L.i( find_all_Bill );
-//        OkHttpClient okHttpClient=new OkHttpClient();
-//        Request.Builder builder=new Request.Builder();
-//        Request request=builder.get().url(find_all_Bill).method( "GET",null ).build();
-//        okhttp3.Call call=okHttpClient.newCall(request);
-//        L.i("查询数据bill");
-//        try {
-//            Response response=call.execute();
-//            assert response.body() != null;
-//            final String str = response.body().string();
-//            JSONObject jsonObject=JSONObject.parseObject( str );
-//            L.i( jsonObject.toJSONString() );
-//            JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
-//            JSONObject row = null;
-//            for (int i = 0; i < jsonArray.size(); i++) {
-//                row = jsonArray.getJSONObject(i);
-//                Bill bill=new Bill( row.getInteger( "id" ), row.getInteger( "collector_id" ),
-//                        row.getString( "state" ),row.getString("price") ,row.getDate("date"),
-//                        row.getString("headquarters"),row.getBoolean("whether_recovery"),row.getBoolean("returnMonenyforcustomer"),
-//                        row.getDouble( "price_forcustomer" ));
-//
-//                bills_list.add( bill );
-//            }
-//            L.i( String.valueOf( bills_list.size() ) );
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-
-//        cardviewForbillAdapter=new CardviewForbillAdapter(bills_list );
-//        recyclerView.setAdapter( cardviewForbillAdapter );
         return view;
     }
 

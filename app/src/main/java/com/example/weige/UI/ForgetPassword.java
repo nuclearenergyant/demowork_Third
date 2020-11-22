@@ -1,14 +1,12 @@
 package com.example.weige.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
@@ -16,16 +14,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
-import java.util.zip.Inflater;
 
-import demo.BaseActivity;
 import entity.User;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import url.APITOALIYUN;
 import utils.L;
-
+//忘记密码
 public class ForgetPassword extends AppCompatActivity{
     private TextInputEditText phone;
     private TextInputEditText password;

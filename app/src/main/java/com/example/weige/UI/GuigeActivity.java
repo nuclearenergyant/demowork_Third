@@ -46,7 +46,6 @@ public class GuigeActivity extends AppCompatActivity  {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent= new Intent( GuigeActivity.this,MainActivity.class );
                 startActivity( intent );
                 finish();

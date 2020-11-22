@@ -1,7 +1,7 @@
 package com.example.weige.UI;
 
 import android.animation.TimeInterpolator;
-
+//设置页面控件移动
 class ElasticOutInterpolator implements TimeInterpolator {
     @Override
     public float getInterpolation(float t) {

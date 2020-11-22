@@ -6,12 +6,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +18,7 @@ import java.util.TimerTask;
 
 import demo.CustomVideoView;
 
-
+//闪屏页的视频播放
 public class videoview extends AppCompatActivity {
 
     public static videoview inst = null;

@@ -9,6 +9,7 @@ buildscript {
         //高级TOAST
         maven { url 'https://jitpack.io' }
 
+
     }
     dependencies {
         //bmob
@@ -27,6 +28,7 @@ allprojects {
 
         //设置阴影
         maven { url 'https://jitpack.io'}
+
     }
 }
 

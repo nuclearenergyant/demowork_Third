@@ -6,7 +6,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
+//设置页面的设置圆圈、圆圈内的文字、圆圈下的文字；
 public class LetterDrawable extends Drawable {
     private int mAlpha = 0;
     private Paint mCirclePaint = new Paint();

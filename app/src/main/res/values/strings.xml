@@ -34,8 +34,9 @@
     <string name="money" translatable="false">基础服务费用：50元</string>
     <string name="start" translatable="false">开始体验</string>
     <string name="hello_there" translatable="false">Hello Human</string>
-    <string name="open" translatable="false">SEE ALL</string>
-    <string name="title">标题</string>
-    <string name="item">金山银山不如绿水青山</string>
+    <string name="open" translatable="false">查看所有</string>
+    <string name="title" translatable="false">标题</string>
+    <string name="item" translatable="false">金山银山不如绿水青山</string>
+    <string name="update_bill" translatable="false">取消订单</string>
 
 </resources>

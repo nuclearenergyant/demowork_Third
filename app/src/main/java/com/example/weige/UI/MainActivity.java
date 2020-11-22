@@ -5,11 +5,8 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-
 import android.os.Bundle;
-
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,28 +14,25 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-
 import androidx.navigation.ui.AppBarConfiguration;
-
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import com.onurkaganaldemir.ktoastlib.KToast;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import entity.Garbage;
 import fragment.DemoFragment01;
 import fragment.DemoFragment02;
@@ -48,11 +42,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import url.APITOALIYUN;
 import utils.L;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.android.material.snackbar.Snackbar.*;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -230,94 +219,110 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchView.setOnQueryTextListener( new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                OkHttpClient okHttpClient_garbage=new OkHttpClient();
-                Request.Builder builder=new Request.Builder();
-                Request request=builder.get().url( APITOALIYUN.Garbage_API).method( "GET",null ).build();
-                okhttp3.Call call=okHttpClient_garbage.newCall(request);
-                try {
-                    Response response=call.execute();
-                    final String str_garbage = response.body().string();
-                    L.i( str_garbage );
-                    JSONObject jsonObject=JSONObject.parseObject( str_garbage );
-                    L.i(  jsonObject.getString( "result"));
-                    JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
-                    JSONObject row = null;
-                    //每次搜索都要删除之前结果
-                    searchlist.clear();
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        row = jsonArray.getJSONObject(i);
-                        Garbage garbage=new Garbage( row.getString( "name" ),row.getInteger( "category" ) );
-                        searchlist.add( garbage );
-                    }
-                    L.i( "开始搜索" );
-                    for (int j=0;j<searchlist.size();j++){
-                        Garbage garbage=searchlist.get( j );
-                        if (garbage.getName().equals( query )){
-                            Toast t;
-                            switch (garbage.getCategory()){
-                                case 1:
-//                                    t=Toast.makeText( MainActivity.this, query+"是可回收垃圾" ,Toast.LENGTH_SHORT);
-//                                    t.setGravity( Gravity.TOP,0,200);
-//                                    t.show();
-                                    TastyToast.makeText(getApplicationContext(),  query+"是可回收垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                                    L.i( query+"是可回收垃圾" );
+                new Thread( new Runnable() {
+                    @Override
+                    public void run() {
+                        OkHttpClient okHttpClient_garbage=new OkHttpClient();
+                        Request.Builder builder=new Request.Builder();
+                        Request request=builder.get().url( APITOALIYUN.Garbage_API).method( "GET",null ).build();
+                        okhttp3.Call call=okHttpClient_garbage.newCall(request);
+                        try {
+                            Response response=call.execute();
+                            final String str_garbage = response.body().string();
+                            L.i( str_garbage );
+                            JSONObject jsonObject=JSONObject.parseObject( str_garbage );
+                            L.i(  jsonObject.getString( "result"));
+                            JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
+                            JSONObject row = null;
+                            //每次搜索都要删除之前结果
+                            searchlist.clear();
+                            for (int i = 0; i < jsonArray.size(); i++) {
+                                row = jsonArray.getJSONObject(i);
+                                Garbage garbage=new Garbage( row.getString( "name" ),row.getInteger( "category" ) );
+                                searchlist.add( garbage );
+                            }
+                            L.i( "开始搜索" );
+
+                            //顺序查询
+                            for (int j=0;j<searchlist.size();j++){
+                                Garbage garbage=searchlist.get( j );
+                                if (garbage.getName().equals( query )){
+                                    Toast t;
+                                    switch (garbage.getCategory()){
+                                        case 1:
+                                            runOnUiThread( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TastyToast.makeText(getApplicationContext(),  query+"是可回收垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                                                }
+                                            } );
+                                            L.i( query+"是可回收垃圾" );
+                                            break;
+                                        case 2:
+                                            runOnUiThread( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TastyToast.makeText(getApplicationContext(),  query+"是有害垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                                                }
+                                            } );
+                                            L.i( query+"有害垃圾" );
+                                            break;
+                                        case 4:
+                                            runOnUiThread( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TastyToast.makeText(getApplicationContext(),  query+"是湿垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                                                }
+                                            } );
+                                            L.i( query+"湿垃圾" );
+                                            break;
+                                        case 8:
+                                            runOnUiThread( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TastyToast.makeText(getApplicationContext(),  query+"是干垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                                                }
+                                            } );
+                                            L.i( query+"是干垃圾" );
+                                            break;
+                                        case 16:
+                                            runOnUiThread( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TastyToast.makeText(getApplicationContext(), query+"是大件垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                                                }
+                                            } );
+
+                                            L.i( query+"大件垃圾" );
+                                            break;
+                                        default:
+                                            break;
+
+                                    }
                                     break;
-                                case 2:
-//                                    t=Toast.makeText( MainActivity.this, query+"是有害垃圾" ,Toast.LENGTH_SHORT);
-//                                    t.setGravity( Gravity.TOP,0,200);
-//                                    t.show();
-                                    TastyToast.makeText(getApplicationContext(),  query+"是有害垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                                    L.i( query+"有害垃圾" );
-                                    break;
-                                case 4:
-//                                    t=Toast.makeText( MainActivity.this, query+"是湿垃圾" ,Toast.LENGTH_SHORT);
-//                                    t.setGravity( Gravity.TOP,0,200);
-//                                    t.show();
-                                    TastyToast.makeText(getApplicationContext(),  query+"是湿垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                                    L.i( query+"湿垃圾" );
-                                    break;
-                                case 8:
-//                                    t=Toast.makeText( MainActivity.this, query+"是干垃圾" ,Toast.LENGTH_SHORT);
-//                                    t.setGravity( Gravity.TOP,0,200);
-//                                    t.show();
-//                                    L.i( query+"干垃圾" );
-                                    TastyToast.makeText(getApplicationContext(),  query+"是干垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                                    break;
-                                case 16:
-//                                    t=Toast.makeText( MainActivity.this, query+"是大件垃圾" ,Toast.LENGTH_SHORT);
-//                                    t.setGravity( Gravity.TOP,0,200);
-//                                    t.show();
-                                    TastyToast.makeText(getApplicationContext(), query+"是大件垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                                    L.i( query+"大件垃圾" );
-                                    break;
-                                default:
-                                    break;
+
+                                }
+                                else {
+                                    int finalJ = j;
+                                    runOnUiThread( new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (finalJ ==(searchlist.size()-1)){
+
+                                                TastyToast.makeText(getApplicationContext(), "搜不到你要的结果!", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+                                            }
+                                        }
+                                    } );
+                                    L.i( "list大小"+searchlist.size()  );
+                                }
+
 
                             }
-                            break;
-
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
-                        else {
-//                            Snackbar.make( MainActivity.this , "搜不到你要的结果", Snackbar.LENGTH_LONG ).show();
-//                            L.i( String.valueOf( garbage.getName().equals( query ) ) );
-
-
-                            if (j==(searchlist.size()-1)){
-//                                t=Toast.makeText( MainActivity.this, "搜不到你要的结果" ,Toast.LENGTH_SHORT);
-//                                t.setGravity( Gravity.TOP,0,200);
-//                                t.show();
-                                // Error
-//                                KToast.errorToast(MainActivity.this, "搜不到你要的结果!", Gravity.BOTTOM, KToast.LENGTH_AUTO);
-                                TastyToast.makeText(getApplicationContext(), "搜不到你要的结果!", TastyToast.LENGTH_LONG, TastyToast.WARNING);
-                            }
-                            L.i( "list大小"+searchlist.size()  );
-                        }
-
-
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                } ).start();
                 return false;
             }
 
@@ -338,8 +343,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this,R.string.share,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.remove_item:
-                //Toast.makeText(MainActivity.this,R.string.item_id_out,Toast.LENGTH_SHORT).show();
-
                 Intent intent=new Intent( MainActivity.this,LoginActivity.class );
                 startActivity( intent );
                 finish();

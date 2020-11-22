@@ -137,12 +137,30 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:background="@drawable/demo_bg"
-            android:text="@string/open"
-            android:layout_gravity="right"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:background="@drawable/demo_bg"
+                android:text="@string/update_bill"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/colorPrimary"
+               />
+
+
+            <Button
+                android:id="@+id/see_all_bill_message"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:background="@drawable/demo_bg"
+                android:text="@string/open"
+                />
+        </LinearLayout>
+
 
     </LinearLayout>
 
