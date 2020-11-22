@@ -1,0 +1,860 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 28\r\n    defaultConfig {\r\n        applicationId \"com.example.weige.demowork\"\r\n        minSdkVersion 22\r\n        targetSdkVersion 28\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        testInstrumentationRunner \"android.support.test.runner.AndroidJUnitRunner\"\r\n        ndk {\r\n            // 设置支持的SO库架构\r\n            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'\r\n        }\r\n    }\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    //bmob\r\n    useLibrary 'org.apache.http.legacy'\r\n    compileOptions {\r\n        sourceCompatibility = 1.8\r\n        targetCompatibility = 1.8\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'com.android.support.constraint:constraint-layout:1.1.3'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.android.material:material:1.0.0'\r\n    implementation 'androidx.appcompat:appcompat:1.0.2'\r\n    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'\r\n    implementation 'androidx.navigation:navigation-fragment:2.0.0'\r\n    implementation 'androidx.navigation:navigation-ui:2.0.0'\r\n    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'com.android.support.test:runner:1.0.2'\r\n    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'\r\n    api \"io.reactivex.rxjava2:rxjava:2.2.2\"\r\n    api 'io.reactivex.rxjava2:rxandroid:2.1.0'\r\n    api 'com.squareup.okhttp3:okhttp:4.2.2'\r\n    //设置阴影\r\n    api 'com.github.JuHonggang:ShadowDrawable:0.1'\r\n    //卡片的使用-订单\r\n    api 'com.android.support:cardview-v7:28.0.0'\r\n\r\n    implementation 'com.android.support:recyclerview-v7:28.0.0'\r\n\r\n    //阿里巴巴的json解析\r\n    api group: 'com.alibaba', name: 'fastjson', version: '1.2.62'\r\n    api 'com.google.android.gms:play-services-maps:17.0.0'\r\n    api 'com.android.support:design:28.0.0'\r\n    //高德地图\r\n    //2d地图\r\n    implementation 'com.amap.api:map2d:latest.integration'\r\n    //导航\r\n\r\n    //搜索\r\n    implementation 'com.amap.api:search:latest.integration'\r\n    //定位\r\n    implementation 'com.amap.api:location:latest.integration'\r\n\r\n    //头像logo变为圆形\r\n    implementation 'de.hdodenhof:circleimageview:3.0.1'\r\n\r\n    /*特色Toast*/\r\n    implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'\r\n    implementation 'com.github.onurkagan:ktoast:1.0.3'\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/build.gradle	(date 1574417127322)
+@@ -49,9 +49,7 @@
+     api 'com.github.JuHonggang:ShadowDrawable:0.1'
+     //卡片的使用-订单
+     api 'com.android.support:cardview-v7:28.0.0'
+-
+     implementation 'com.android.support:recyclerview-v7:28.0.0'
+-
+     //阿里巴巴的json解析
+     api group: 'com.alibaba', name: 'fastjson', version: '1.2.62'
+     api 'com.google.android.gms:play-services-maps:17.0.0'
+@@ -60,17 +58,19 @@
+     //2d地图
+     implementation 'com.amap.api:map2d:latest.integration'
+     //导航
+-
+     //搜索
+     implementation 'com.amap.api:search:latest.integration'
+     //定位
+     implementation 'com.amap.api:location:latest.integration'
+-
+     //头像logo变为圆形
+     implementation 'de.hdodenhof:circleimageview:3.0.1'
+-
+     /*特色Toast*/
+     implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+     implementation 'com.github.onurkagan:ktoast:1.0.3'
++
++    /*特色cardview*/
++
++
++    implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.2'
+ }
+ 
+Index: app/src/main/java/com/example/weige/UI/ElasticOutInterpolator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport android.animation.TimeInterpolator;\r\n\r\nclass ElasticOutInterpolator implements TimeInterpolator {\r\n    @Override\r\n    public float getInterpolation(float t) {\r\n        if (t == 0) return 0;\r\n        if (t >= 1) return 1;\r\n        float p=.3f;\r\n        float s=p/4;\r\n        return ((float)Math.pow(2,-10*t) * (float)Math.sin( (t-s)*(2*(float)Math.PI)/p) + 1);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/ElasticOutInterpolator.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/ElasticOutInterpolator.java	(date 1574235912481)
+@@ -1,7 +1,7 @@
+ package com.example.weige.UI;
+ 
+ import android.animation.TimeInterpolator;
+-
++//设置页面控件移动
+ class ElasticOutInterpolator implements TimeInterpolator {
+     @Override
+     public float getInterpolation(float t) {
+Index: app/src/main/java/com/example/weige/UI/GuigeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.view.ViewTreeObserver;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.RelativeLayout;\r\nimport android.widget.VideoView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.viewpager.widget.PagerAdapter;\r\nimport androidx.viewpager.widget.ViewPager;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n//动画界面，即三页介绍页面\r\npublic class GuigeActivity extends AppCompatActivity  {\r\n\r\n\r\n    private ViewPager viewPager;\r\n    private int[]images={R.drawable.b1,R.drawable.b2,R.drawable.b3};\r\n    //用来存放几个imageview的实例\r\n    private List<VideoView>videoViews;\r\n    private List<ImageView> imageViews;\r\n    private LinearLayout li;\r\n    private RelativeLayout rl;\r\n    private ImageView black_color;\r\n    private int left;\r\n    private Button btn;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_guige2);\r\n\r\n        viewPager= findViewById(R.id.viewPager);\r\n        viewPager.setAdapter(new MyAdapter());\r\n        li =  findViewById(R.id.linear);\r\n        rl =  findViewById(R.id.rl);\r\n        btn = findViewById(R.id.btn);\r\n        btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Intent intent= new Intent( GuigeActivity.this,MainActivity.class );\r\n                startActivity( intent );\r\n                finish();\r\n            }\r\n        });\r\n        //图片：\r\n        imageViews = new ArrayList<ImageView>();\r\n        for (int i = 0; i < images.length; i++) {\r\n            ImageView imageView = new ImageView(this);\r\n            imageView.setImageResource(images[i]);\r\n\r\n            imageView.setScaleType( ImageView.ScaleType.FIT_XY);\r\n            imageViews.add(imageView);\r\n\r\n            ImageView white_color = new ImageView(this);\r\n            white_color.setImageResource(R.drawable.white_circle);\r\n\r\n            //使用LayoutParams改变控件的位置\r\n            LinearLayout.LayoutParams layoutParams =\r\n                    new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,\r\n                            RelativeLayout.LayoutParams.WRAP_CONTENT);\r\n            if (i > 0) {\r\n                layoutParams.leftMargin = 20;\r\n            }\r\n            white_color.setLayoutParams(layoutParams);\r\n            li.addView(white_color);\r\n        }\r\n        black_color = new ImageView(this);\r\n        black_color.setImageResource(R.drawable.black_circle);\r\n        rl.addView(black_color);\r\n\r\n        //示图树\r\n        //关于圆点\r\n        black_color.getViewTreeObserver().\r\n                addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {\r\n                    //该方法就是在界面全面绘制结束之后回调\r\n                    @Override\r\n                    public void onGlobalLayout() {\r\n                        // TODO Auto-generated method stub\r\n                        //求距离\r\n                        left = li.getChildAt(1).getLeft() - li.getChildAt(0).getLeft();\r\n                        System.out.println(\"leftΪ\" + left);\r\n                        black_color.getViewTreeObserver().removeOnGlobalLayoutListener(this);\r\n                    }\r\n                });\r\n        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {\r\n\r\n            @Override\r\n            public void onPageSelected(int position) {\r\n                // TODO Auto-generated method stub\r\n                if (position == images.length - 1) {\r\n                    btn.setVisibility(View.VISIBLE);\r\n                } else {\r\n                    btn.setVisibility(View.GONE);\r\n                }\r\n            }\r\n            //滑动的时候\r\n            @Override\r\n            public void onPageScrolled(int position, float posionOffset, int arg2) {\r\n                // TODO Auto-generated method stub\r\n                System.out.println(posionOffset);//滑动的百分比\r\n                Log.d(\"viewpager:\", String.valueOf(posionOffset));\r\n                RelativeLayout.LayoutParams layoutParams =\r\n                        (RelativeLayout.LayoutParams) black_color.getLayoutParams();\r\n                layoutParams.leftMargin = (int) (left * posionOffset + position * left);\r\n                black_color.setLayoutParams(layoutParams);\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onPageScrollStateChanged(int arg0) {\r\n                // TODO Auto-generated method stub\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    class MyAdapter extends PagerAdapter{\r\n\r\n        @Override\r\n        public int getCount() {\r\n            // TODO Auto-generated method stub\r\n            return images.length;\r\n        }\r\n\r\n        @Override\r\n        public boolean isViewFromObject(View arg0, Object arg1) {\r\n            // TODO Auto-generated method stub\r\n            return arg0==arg1;\r\n        }\r\n        @Override\r\n        public Object instantiateItem(ViewGroup container, int position) {\r\n            // TODO Auto-generated method stub\r\n\r\n            container.addView(imageViews.get(position));\r\n            return imageViews.get(position);\r\n        }\r\n        @Override\r\n        public void destroyItem(ViewGroup container, int position, Object object) {\r\n            // TODO Auto-generated method stub\r\n            container.removeView((View)object);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/GuigeActivity.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/GuigeActivity.java	(date 1574224833564)
+@@ -46,7 +46,6 @@
+         btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-
+                 Intent intent= new Intent( GuigeActivity.this,MainActivity.class );
+                 startActivity( intent );
+                 finish();
+Index: app/src/main/java/com/example/weige/UI/ForgetPassword.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextUtils;\r\nimport android.text.TextWatcher;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.alibaba.fastjson.JSONObject;\r\nimport com.google.android.material.snackbar.Snackbar;\r\nimport com.google.android.material.textfield.TextInputEditText;\r\nimport com.google.android.material.textfield.TextInputLayout;\r\n\r\nimport java.util.Objects;\r\nimport java.util.zip.Inflater;\r\n\r\nimport demo.BaseActivity;\r\nimport entity.User;\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.Request;\r\nimport okhttp3.Response;\r\nimport url.APITOALIYUN;\r\nimport utils.L;\r\n\r\npublic class ForgetPassword extends AppCompatActivity{\r\n    private TextInputEditText phone;\r\n    private TextInputEditText password;\r\n    private TextInputEditText password_again;\r\n\r\n    private TextInputLayout layout_forget_update_password_view_phone;\r\n    private TextInputLayout mTextInputLayoutPassword;\r\n    private TextInputLayout mTextInputLayoutPassword_again_forget;\r\n\r\n    private Button button_to_update_password;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate( savedInstanceState );\r\n        setContentView( R.layout.activity_forget_password );\r\n\r\n        phone=findViewById( R.id.text_input_forget_id );\r\n        password=findViewById( R.id.text_input_password_forget );\r\n        password_again=findViewById( R.id.text_input_password_again_forget );\r\n        button_to_update_password=findViewById( R.id.update_password );\r\n\r\n        layout_forget_update_password_view_phone=findViewById( R.id.layout_forget_update_password );\r\n        mTextInputLayoutPassword=findViewById( R.id.text_input_layout_password_forget );\r\n        mTextInputLayoutPassword_again_forget=findViewById( R.id.text_input_layout_password_again_forget );\r\n        //设置可以计数\r\n        layout_forget_update_password_view_phone.setCounterEnabled(true);\r\n        //计数的最大值\r\n        layout_forget_update_password_view_phone.setCounterMaxLength(11);\r\n\r\n        button_to_update_password.setOnClickListener( new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                forget_password(v);\r\n            }\r\n        } );\r\n\r\n\r\n    }\r\n\r\n\r\n    //修改密码\r\n    public void forget_password(View v){\r\n\r\n        String name = phone.getText().toString().trim();\r\n        String password_forget = password.getText().toString().trim();\r\n        String password_again_forget = password_again.getText().toString().trim();\r\n\r\n\r\n        if (TextUtils.isEmpty( name ) || name.length() != 11) {\r\n            phone.setError( \"输入正确手机号码\" );\r\n        }\r\n        //判断密码格式\r\n        if (TextUtils.isEmpty( password_forget ) || password.length() < 6) {\r\n            password.setError( \"密码错误不能少于6个字符\" );\r\n        }\r\n        //判断确认密码格式\r\n        if (TextUtils.isEmpty( password_again_forget ) || password_again.length() < 6) {\r\n            password_again.setError( \"密码错误不能少于6个字符\" );\r\n        }\r\n\r\n\r\n        //判断是否为空\r\n        if (!TextUtils.isEmpty( name ) & !TextUtils.isEmpty( password_forget )\r\n                & !TextUtils.isEmpty( password_again_forget )) {\r\n            //判断两次输入密码是否相同\r\n            if (password_forget.equals( password_again_forget )) {\r\n\r\n                if (password_forget.trim().length()>=6&&name.trim().length()==11){\r\n                    //修改密码\r\n                    User myuser = new User();\r\n                    myuser.setPhone( name );\r\n                    myuser.setPassword( password_forget );\r\n\r\n                    //开始通过请求进行修改密码\r\n                    String API_Register= APITOALIYUN.IP_address_forget_password+\"phone=\"+phone.getText().toString()+\"&\"+\"password=\"+password.getText().toString();\r\n                    L.i( API_Register );\r\n                    OkHttpClient okHttpClient=new OkHttpClient();\r\n                    Request.Builder builder=new Request.Builder();\r\n                    Request request=builder.get().url(API_Register).method( \"GET\",null ).build();\r\n                    okhttp3.Call call=okHttpClient.newCall(request);\r\n                    L.i(\"点击忘记密码按钮\");\r\n                    try {\r\n                        Response response=call.execute();\r\n                        assert response.body() != null;\r\n                        final String str = response.body().string();\r\n                        L.i( str );\r\n\r\n                        JSONObject jsonObject=JSONObject.parseObject( str );\r\n                        L.i( jsonObject.toJSONString() );\r\n                        L.i( String.valueOf( jsonObject.getInteger( \"code\" ) ) );\r\n                        if (Objects.equals( jsonObject.getInteger( \"code\" ), 200)) {\r\n                            L.i( \"修改成功\" );\r\n                            Intent intent = new Intent( ForgetPassword.this, LoginActivity.class );\r\n                            startActivity( intent );\r\n                            finish();\r\n                        } else {\r\n                            Snackbar.make( v, \"该账号没有被修改成功\", Snackbar.LENGTH_LONG ).show();\r\n                            L.i( \"修改失败\" );\r\n                        }\r\n                    }catch (Exception e){\r\n                        e.printStackTrace();\r\n                    }\r\n                }else {\r\n                    Snackbar.make( v, \"不符合格式，请检查账号为11位，密码不能少于6位\", Snackbar.LENGTH_LONG ).show();\r\n                }\r\n\r\n            } else {\r\n                password.setError( \"两个密码不一致\" );\r\n                password_again.setError( \"两个密码不一致\" );\r\n            }\r\n\r\n        } else {\r\n            Snackbar.make( v, \"输入框不能为空\", Snackbar.LENGTH_LONG ).show();\r\n        }\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/ForgetPassword.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/ForgetPassword.java	(date 1590983230749)
+@@ -1,31 +1,27 @@
+ package com.example.weige.UI;
+ 
+-import androidx.appcompat.app.AppCompatActivity;
+-
+ import android.content.Intent;
+ import android.os.Bundle;
+-import android.text.Editable;
+ import android.text.TextUtils;
+-import android.text.TextWatcher;
+ import android.view.View;
+ import android.widget.Button;
+ 
++import androidx.appcompat.app.AppCompatActivity;
++
+ import com.alibaba.fastjson.JSONObject;
+ import com.google.android.material.snackbar.Snackbar;
+ import com.google.android.material.textfield.TextInputEditText;
+ import com.google.android.material.textfield.TextInputLayout;
+ 
+ import java.util.Objects;
+-import java.util.zip.Inflater;
+ 
+-import demo.BaseActivity;
+ import entity.User;
+ import okhttp3.OkHttpClient;
+ import okhttp3.Request;
+ import okhttp3.Response;
+ import url.APITOALIYUN;
+ import utils.L;
+-
++//忘记密码
+ public class ForgetPassword extends AppCompatActivity{
+     private TextInputEditText phone;
+     private TextInputEditText password;
+Index: app/src/main/java/com/example/weige/UI/SettingView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\n\r\nimport android.animation.Animator;\r\nimport android.animation.ObjectAnimator;\r\nimport android.animation.ValueAnimator;\r\nimport android.app.Activity;\r\nimport android.content.Context;\r\nimport android.util.AttributeSet;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.view.animation.DecelerateInterpolator;\r\n\r\nimport android.widget.AdapterView;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.GridView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\n\r\n\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\n\r\npublic class SettingView extends ViewGroup {\r\n    private Context mContext;\r\n    private ListView mListView;\r\n    private LinearLayout mHeaderView;\r\n    private GridView mGridView;\r\n    private FloatingActionButton mFab;\r\n    private final int ANIM_TIME = 800;\r\n    private float mDensity = 1;\r\n\r\n\r\n    public SettingView(Context context) {\r\n        this(context, null);\r\n    }\r\n\r\n    public SettingView(Context context, AttributeSet attrs) {\r\n        this(context, attrs, 0);\r\n    }\r\n\r\n    public SettingView(Context context, AttributeSet attrs, int defStyleAttr) {\r\n        super(context, attrs, defStyleAttr);\r\n        mContext = context;\r\n        mDensity = context.getResources().getDisplayMetrics().density;\r\n        init(context);\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    protected void onFinishInflate() {\r\n        super.onFinishInflate();\r\n        final int childCount = getChildCount();\r\n        for (int i = 0; i<childCount; i++) {\r\n            View v = getChildAt(i);\r\n            if (v instanceof FloatingActionButton) {\r\n                mFab = (FloatingActionButton) v;\r\n                mFab.setOnClickListener(new OnClickListener() {\r\n                    @Override\r\n                    public void onClick(View v) {\r\n                        ValueAnimator anim = ObjectAnimator.ofFloat(v, \"translationY\",\r\n                                -mFab.getHeight() - ((MarginLayoutParams)mFab.getLayoutParams()).bottomMargin, 0);\r\n                        anim.setDuration(200);\r\n                        anim.setInterpolator(new DecelerateInterpolator());\r\n                        anim.addListener(new ButtomListener());\r\n                        anim.start();\r\n                    }\r\n                });\r\n            }\r\n\r\n        }\r\n    }\r\n\r\n    @Override\r\n    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {\r\n        super.onMeasure(widthMeasureSpec, heightMeasureSpec);\r\n        if(null != mHeaderView) {\r\n            measureChild(mHeaderView, widthMeasureSpec, heightMeasureSpec);\r\n        }\r\n        if (null != mListView) {\r\n            measureChild(mListView, widthMeasureSpec, heightMeasureSpec);\r\n        }\r\n        if (null != mFab) {\r\n            measureChild(mFab, widthMeasureSpec, heightMeasureSpec);\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onLayout(boolean changed, int l, int t, int r, int b) {\r\n\r\n        int paddingLeft   = getPaddingLeft();\r\n        int paddingRight = getPaddingRight();\r\n        int paddingTop = getPaddingTop();\r\n        if(null != mHeaderView){\r\n            MarginLayoutParams lp = (MarginLayoutParams) mHeaderView.getLayoutParams();\r\n            final int left = paddingLeft + lp.leftMargin;\r\n            final int bottom = paddingTop + lp.topMargin;\r\n            final int top = bottom - mHeaderView.getMeasuredHeight();\r\n            final int right = left + mHeaderView.getMeasuredWidth();\r\n\r\n            mHeaderView.layout(left, top, right, bottom);\r\n        }\r\n\r\n        if(null != mListView){\r\n            MarginLayoutParams lp = (MarginLayoutParams)mListView.getLayoutParams();\r\n            final int left = paddingLeft + lp.leftMargin;\r\n            final int top = getMeasuredHeight();\r\n            final int right = left + mListView.getMeasuredWidth();\r\n            final int bottom = top + mListView.getMeasuredHeight();\r\n            mListView.layout(left, top, right, bottom);\r\n        }\r\n\r\n        if (null != mFab) {\r\n            MarginLayoutParams lp = (MarginLayoutParams)mFab.getLayoutParams();\r\n            final int left = paddingLeft + lp.leftMargin;\r\n            final int top = getMeasuredHeight();\r\n            final int right = left + mFab.getMeasuredWidth();\r\n            final int bottom = top + mFab.getMeasuredHeight();\r\n            mFab.layout(left, top, right, bottom);\r\n        }\r\n        startAnimotion();\r\n    }\r\n\r\n    public void init(Context context) {\r\n        initHeaderView(context);\r\n        initListView(context);\r\n        //initFloatingButton(context);\r\n    }\r\n\r\n//    public void initFloatingButton(Context context) {\r\n//        mFab = new FloatingActionButton(context);\r\n//        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);\r\n//        mFab.setLayoutParams(l);\r\n//        mFab.setBackgroundTintList( ColorStateList.valueOf( Color.BLACK ) );\r\n//        mFab.setRippleColor( Color.BLACK);\r\n//        mFab.setBackgroundColor(Color.BLACK);\r\n//        mFab.setBackgroundDrawable(getResources().getDrawable(R.drawable.returntomain));\r\n//        addView(mFab);\r\n//\r\n//    }\r\n\r\n    public int calPxFromDp(int px){\r\n        return (int)(px * mDensity);\r\n    }\r\n\r\n    public void initHeaderView(Context context) {\r\n        mHeaderView = new LinearLayout(context);\r\n        mHeaderView.setOrientation(LinearLayout.VERTICAL);\r\n        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);\r\n        mHeaderView.setLayoutParams(l);\r\n        mHeaderView.setPadding(0, calPxFromDp(10), 0, calPxFromDp(10));\r\n\r\n        LinearLayout linearLayout = new LinearLayout(context);\r\n        l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);\r\n        linearLayout.setLayoutParams(l);\r\n        linearLayout.setPadding(0,calPxFromDp(15), 0, calPxFromDp(15));\r\n\r\n        mGridView = new GridView(context);\r\n        l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);\r\n        mGridView.setLayoutParams(l);\r\n        mGridView.setNumColumns(4);\r\n\r\n        mGridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);\r\n        linearLayout.addView(mGridView);\r\n\r\n        mHeaderView.addView(linearLayout);\r\n\r\n\r\n        addView(mHeaderView);\r\n\r\n\r\n    }\r\n\r\n    //点击事件响应\r\n    public void setGridAdapter(BaseAdapter adapter) {\r\n        if (null != mGridView) {\r\n            mGridView.setAdapter(adapter);\r\n            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\r\n                @Override\r\n                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {\r\n                    Toast.makeText(mContext, ((TextView)view.findViewById(R.id.fun_name)).getText(), Toast.LENGTH_SHORT).show();\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    public void initListView(Context context) {\r\n        mListView = new ListView(context);\r\n        LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);\r\n        mListView.setLayoutParams(l);\r\n        addView(mListView);\r\n    }\r\n\r\n    public void setListAdapter(BaseAdapter adapter) {\r\n        if(null != mListView) {\r\n            mListView.setAdapter(adapter);\r\n            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\r\n                @Override\r\n                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {\r\n                    Toast.makeText(mContext, ((TextView)view.findViewById(R.id.fun_name)).getText(), Toast.LENGTH_SHORT).show();\r\n\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    public void startAnimotion() {\r\n        if(null != mHeaderView) {\r\n            ValueAnimator headerAnim = ObjectAnimator.ofFloat(mHeaderView, \"translationY\", 0, mHeaderView.getHeight());\r\n            headerAnim.setDuration(ANIM_TIME);\r\n            headerAnim.setInterpolator(new ElasticOutInterpolator());\r\n            headerAnim.start();\r\n        }\r\n        if (null != mListView) {\r\n            ValueAnimator listAnim = ObjectAnimator.ofFloat(mListView, \"translationY\", 0, mHeaderView.getHeight() - getHeight());\r\n            listAnim.setDuration(ANIM_TIME);\r\n            listAnim.setInterpolator(new ElasticOutInterpolator());\r\n            listAnim.start();\r\n        }\r\n\r\n        if (null != mFab) {\r\n            ValueAnimator fabAnim = ObjectAnimator.ofFloat(mFab, \"translationY\", 0, - mFab.getHeight() - ((MarginLayoutParams)mFab.getLayoutParams()).bottomMargin);\r\n            fabAnim.setDuration(ANIM_TIME);\r\n            fabAnim.setInterpolator(new ElasticOutInterpolator());\r\n            fabAnim.start();\r\n        }\r\n\r\n    }\r\n\r\n    private class Indicator {\r\n        private int offsetHeader = 0;\r\n        private int offsetList = 0;\r\n        private int offsetButton = 0;\r\n\r\n        private int stopScrollY; //header和listview中间的截止线\r\n        private int screenTopY;\r\n        private int screenButtomY;\r\n\r\n        public void setOption(int topY, int buttomY, int stopY) {\r\n            screenTopY = topY;\r\n            screenButtomY = buttomY;\r\n            stopScrollY = stopY;\r\n\r\n            offsetHeader = topY;\r\n            offsetList = buttomY;\r\n\r\n        }\r\n\r\n        public int getOffsetHeader() {\r\n            return offsetHeader;\r\n        }\r\n\r\n        public int getOffsetList() {\r\n            return offsetList;\r\n        }\r\n\r\n        public int getOffsteButton() {\r\n            return offsetButton;\r\n        }\r\n\r\n//        public int g\r\n\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {\r\n        return p instanceof LayoutParams;\r\n    }\r\n\r\n    @Override\r\n    protected ViewGroup.LayoutParams generateDefaultLayoutParams() {\r\n        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);\r\n    }\r\n\r\n    @Override\r\n    protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {\r\n        return new LayoutParams(p);\r\n    }\r\n\r\n    @Override\r\n    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {\r\n        return new LayoutParams(getContext(), attrs);\r\n    }\r\n\r\n    public static class LayoutParams extends MarginLayoutParams {\r\n\r\n        public LayoutParams(Context c, AttributeSet attrs) {\r\n            super(c, attrs);\r\n        }\r\n\r\n        public LayoutParams(int width, int height) {\r\n            super(width, height);\r\n        }\r\n\r\n        @SuppressWarnings({\"unused\"})\r\n        public LayoutParams(MarginLayoutParams source) {\r\n            super(source);\r\n        }\r\n\r\n        public LayoutParams(ViewGroup.LayoutParams source) {\r\n            super(source);\r\n        }\r\n    }\r\n\r\n    public class ButtomListener implements Animator.AnimatorListener{\r\n\r\n        @Override\r\n        public void onAnimationStart(Animator animation) {\r\n\r\n        }\r\n\r\n        @Override\r\n        public void onAnimationEnd(Animator animation) {\r\n            ((Activity)mContext).finish();\r\n        }\r\n\r\n        @Override\r\n        public void onAnimationCancel(Animator animation) {\r\n\r\n        }\r\n\r\n        @Override\r\n        public void onAnimationRepeat(Animator animation) {\r\n\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/SettingView.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/SettingView.java	(date 1574235761409)
+@@ -23,6 +23,7 @@
+ 
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+ 
++//设置页面的优化
+ public class SettingView extends ViewGroup {
+     private Context mContext;
+     private ListView mListView;
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"com.example.weige.UI\">\r\n    <!-- 用于写入缓存数据到扩展存储卡 -->\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" /> <!-- 用于申请调用A-GPS模块 -->\r\n    <uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->\r\n    <uses-permission android:name=\"android.permission.BLUETOOTH\" />\r\n    <uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\" /> <!-- 允许程序获取网络状态 -->\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" /> <!-- 允许联网 -->\r\n    <uses-permission android:name=\"android.permission.INTERNET\" /> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" /> <!-- 获取wifi网络状态的信息 -->\r\n    <uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->\r\n    <uses-permission android:name=\"android.permission.WAKE_LOCK\" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->\r\n    <uses-permission android:name=\"android.permission.READ_PHONE_STATE\" /> <!-- 读取Log -->\r\n    <uses-permission\r\n        android:name=\"android.permission.READ_LOGS\"\r\n        tools:ignore=\"ProtectedPermissions\" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:appComponentFactory=\"\"\r\n        android:icon=\"@drawable/logo2\"\r\n        android:label=\"@string/app_name_xian\"\r\n        android:roundIcon=\"@drawable/logo2\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/MyAppThemeDemo\"\r\n        tools:replace=\"android:appComponentFactory\">\r\n\r\n\r\n        <!-- 每个app拥有自己单独的定位service -->\r\n        <service android:name=\"com.amap.api.location.APSService\"/>\r\n        <!-- =有加入key -->\r\n        <meta-data\r\n            android:name=\"com.amap.api.v2.apikey\"\r\n            android:value=\"7f0fe6bd80e89c108935105646dcb2df\" />\r\n\r\n\r\n        <!--下单页面-->\r\n        <activity\r\n            android:name=\".ScrollingActivity\"\r\n            android:label=\"@string/title_activity_scrolling\"\r\n            android:theme=\"@style/MyAppThemeDemo.NoActionBar2\"></activity>\r\n\r\n        <!--注册页面-->\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:label=\"注册\"\r\n            android:theme=\"@style/NOActionFillscreen\"/>\r\n        <!-- 登录界面 -->\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:label=\"登录\"\r\n            android:theme=\"@style/NOActionFillscreen\"/>\r\n        <!-- 闪屏 -->\r\n        <activity\r\n            android:name=\".SplashActivity\"\r\n            android:theme=\"@style/NOActionFillscreen\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <!-- 引导页 -->\r\n        <activity\r\n            android:name=\".GuigeActivity\"\r\n            android:theme=\"@style/NOActionFillscreen\" >\r\n\r\n        </activity>\r\n        <!-- 设置页面 -->\r\n        <activity android:name=\".SettingActivity\"\r\n            android:theme=\"@style/NOActionFillscreen\"/>\r\n        <!-- 主屏页面 -->\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:theme=\"@style/MyAppThemeDemo\" >\r\n\r\n        </activity>\r\n        <!--修改密码-->\r\n        <activity android:name=\".ForgetPassword\"\r\n            android:label=\"修改密码\"\r\n            android:theme=\"@style/NOActionFillscreen\"/>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/AndroidManifest.xml	(date 1578893555319)
+@@ -2,26 +2,39 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     package="com.example.weige.UI">
++
+     <!-- 用于写入缓存数据到扩展存储卡 -->
+-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
+-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
++    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
++    <!-- 用于申请调用A-GPS模块 -->
++    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
++    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+     <uses-permission android:name="android.permission.BLUETOOTH" />
+-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 允许程序获取网络状态 -->
+-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许联网 -->
+-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取wifi网络状态的信息 -->
+-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取Log -->
++    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
++    <!-- 允许程序获取网络状态 -->
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <!-- 允许联网 -->
++    <uses-permission android:name="android.permission.INTERNET" />
++    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <!-- 获取wifi网络状态的信息 -->
++    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
++    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
++    <uses-permission android:name="android.permission.WAKE_LOCK" />
++    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
++    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
++    <!-- 允许读取手机状态 用于创建BmobInstallation -->
++    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
++    <!-- 读取Log -->
+     <uses-permission
+         android:name="android.permission.READ_LOGS"
+-        tools:ignore="ProtectedPermissions" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
++        tools:ignore="ProtectedPermissions" />
++    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+ 
+     <application
++        android:appComponentFactory="123"
+         android:allowBackup="true"
+-        android:appComponentFactory=""
++        android:usesCleartextTraffic="true"
+         android:icon="@drawable/logo2"
+         android:label="@string/app_name_xian"
+         android:roundIcon="@drawable/logo2"
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\n\r\nbuildscript {\r\n    \r\n    repositories {\r\n        google()\r\n        //bmob\r\n        jcenter()\r\n        //高级TOAST\r\n        maven { url 'https://jitpack.io' }\r\n\r\n    }\r\n    dependencies {\r\n        //bmob\r\n        classpath 'com.android.tools.build:gradle:3.5.2'\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\nallprojects {\r\n    repositories {\r\n        google()\r\n\r\n        /*高德地图*/\r\n        jcenter()\r\n\r\n\r\n        //设置阴影\r\n        maven { url 'https://jitpack.io'}\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ build.gradle	(date 1574182222364)
+@@ -9,6 +9,7 @@
+         //高级TOAST
+         maven { url 'https://jitpack.io' }
+ 
++
+     }
+     dependencies {
+         //bmob
+@@ -27,6 +28,7 @@
+ 
+         //设置阴影
+         maven { url 'https://jitpack.io'}
++
+     }
+ }
+ 
+Index: app/src/main/java/fragment/DemoFragment03.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fragment;\r\n\r\n\r\nimport android.os.Bundle;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.alibaba.fastjson.JSONArray;\r\nimport com.alibaba.fastjson.JSONObject;\r\nimport com.example.weige.UI.R;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport adapter.CardviewForbillAdapter;\r\nimport entity.Bill;\r\nimport okhttp3.Call;\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.Request;\r\nimport okhttp3.Response;\r\nimport url.APITOALIYUN;\r\nimport utils.L;\r\n\r\npublic class DemoFragment03 extends Fragment {\r\n\r\n    //测试cardview\r\n    private List<Bill> bills_list=new ArrayList<>(  );\r\n    private CardviewForbillAdapter cardviewForbillAdapter;\r\n\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n        View view=inflater.inflate(R.layout.activity_demo_fragment03,null);\r\n        /*测试*/\r\n\r\n        RecyclerView recyclerView=view.findViewById( R.id.recycle_for_bill );\r\n        LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getContext() );\r\n\r\n        linearLayoutManager.setOrientation( LinearLayoutManager.VERTICAL );\r\n        recyclerView.setLayoutManager( linearLayoutManager );\r\n        bills_list.clear();\r\n\r\n        //请求数据库的数据\r\n        new Thread( new Runnable() {\r\n            @Override\r\n            public void run() {\r\n                String find_all_Bill= APITOALIYUN.IP_address_check_bill+\"UserID=\"+APITOALIYUN.id;\r\n                L.i( find_all_Bill );\r\n                OkHttpClient okHttpClient=new OkHttpClient();\r\n                Request.Builder builder=new Request.Builder();\r\n                Request request=builder.get().url(find_all_Bill).method( \"GET\",null ).build();\r\n                Call call=okHttpClient.newCall(request);\r\n                L.i(\"查询数据bill\");\r\n                try {\r\n                    Response response=call.execute();\r\n                    assert response.body() != null;\r\n                    final String str = response.body().string();\r\n                    JSONObject jsonObject=JSONObject.parseObject( str );\r\n                    L.i( jsonObject.toJSONString() );\r\n                    JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( \"result\" ));\r\n                    JSONObject row = null;\r\n                    for (int i = 0; i < jsonArray.size(); i++) {\r\n                        row = jsonArray.getJSONObject(i);\r\n                        Bill bill=new Bill( row.getInteger( \"id\" ), row.getInteger( \"user_id\" ),\r\n                                row.getInteger( \"collector_id\" ),\r\n                                row.getString( \"bill_address\" ),\r\n                                row.getString(\"phone\") ,\r\n                                row.getString(\"state\") ,\r\n                                row.getString(\"price\") ,\r\n                                row.getDate(\"date\"),\r\n                                row.getString(\"headquarters\"),\r\n                                row.getBoolean(\"whether_recovery\"),\r\n                                row.getBoolean(\"returnMonenyforcustomer\"),\r\n                                row.getDouble( \"price_forcustomer\" ));\r\n\r\n                        bills_list.add( bill );\r\n                    }\r\n                    L.i( \"订单的数量为：\"+bills_list.size());\r\n                    cardviewForbillAdapter=new CardviewForbillAdapter(bills_list );\r\n\r\n                    getActivity().runOnUiThread(new Runnable() {\r\n                        @Override\r\n                        public void run() {\r\n                            recyclerView.setAdapter( cardviewForbillAdapter );\r\n                        } });\r\n\r\n\r\n                }catch (Exception e){\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        } ).start();\r\n//        L.i( \"订单的数量为：\"+bills_list.size());\r\n//        String find_all_Bill= APITOALIYUN.IP_address_check_bill+\"UserID=\"+APITOALIYUN.id;\r\n//        L.i( find_all_Bill );\r\n//        OkHttpClient okHttpClient=new OkHttpClient();\r\n//        Request.Builder builder=new Request.Builder();\r\n//        Request request=builder.get().url(find_all_Bill).method( \"GET\",null ).build();\r\n//        okhttp3.Call call=okHttpClient.newCall(request);\r\n//        L.i(\"查询数据bill\");\r\n//        try {\r\n//            Response response=call.execute();\r\n//            assert response.body() != null;\r\n//            final String str = response.body().string();\r\n//            JSONObject jsonObject=JSONObject.parseObject( str );\r\n//            L.i( jsonObject.toJSONString() );\r\n//            JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( \"result\" ));\r\n//            JSONObject row = null;\r\n//            for (int i = 0; i < jsonArray.size(); i++) {\r\n//                row = jsonArray.getJSONObject(i);\r\n//                Bill bill=new Bill( row.getInteger( \"id\" ), row.getInteger( \"collector_id\" ),\r\n//                        row.getString( \"state\" ),row.getString(\"price\") ,row.getDate(\"date\"),\r\n//                        row.getString(\"headquarters\"),row.getBoolean(\"whether_recovery\"),row.getBoolean(\"returnMonenyforcustomer\"),\r\n//                        row.getDouble( \"price_forcustomer\" ));\r\n//\r\n//                bills_list.add( bill );\r\n//            }\r\n//            L.i( String.valueOf( bills_list.size() ) );\r\n//        }catch (Exception e){\r\n//            e.printStackTrace();\r\n//        }\r\n\r\n\r\n\r\n//        cardviewForbillAdapter=new CardviewForbillAdapter(bills_list );\r\n//        recyclerView.setAdapter( cardviewForbillAdapter );\r\n        return view;\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/fragment/DemoFragment03.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/fragment/DemoFragment03.java	(date 1574221699513)
+@@ -99,40 +99,6 @@
+                 }
+             }
+         } ).start();
+-//        L.i( "订单的数量为："+bills_list.size());
+-//        String find_all_Bill= APITOALIYUN.IP_address_check_bill+"UserID="+APITOALIYUN.id;
+-//        L.i( find_all_Bill );
+-//        OkHttpClient okHttpClient=new OkHttpClient();
+-//        Request.Builder builder=new Request.Builder();
+-//        Request request=builder.get().url(find_all_Bill).method( "GET",null ).build();
+-//        okhttp3.Call call=okHttpClient.newCall(request);
+-//        L.i("查询数据bill");
+-//        try {
+-//            Response response=call.execute();
+-//            assert response.body() != null;
+-//            final String str = response.body().string();
+-//            JSONObject jsonObject=JSONObject.parseObject( str );
+-//            L.i( jsonObject.toJSONString() );
+-//            JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
+-//            JSONObject row = null;
+-//            for (int i = 0; i < jsonArray.size(); i++) {
+-//                row = jsonArray.getJSONObject(i);
+-//                Bill bill=new Bill( row.getInteger( "id" ), row.getInteger( "collector_id" ),
+-//                        row.getString( "state" ),row.getString("price") ,row.getDate("date"),
+-//                        row.getString("headquarters"),row.getBoolean("whether_recovery"),row.getBoolean("returnMonenyforcustomer"),
+-//                        row.getDouble( "price_forcustomer" ));
+-//
+-//                bills_list.add( bill );
+-//            }
+-//            L.i( String.valueOf( bills_list.size() ) );
+-//        }catch (Exception e){
+-//            e.printStackTrace();
+-//        }
+-
+-
+-
+-//        cardviewForbillAdapter=new CardviewForbillAdapter(bills_list );
+-//        recyclerView.setAdapter( cardviewForbillAdapter );
+         return view;
+     }
+ 
+Index: app/src/main/java/com/example/weige/UI/LetterDrawable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport android.graphics.Canvas;\r\nimport android.graphics.Color;\r\nimport android.graphics.ColorFilter;\r\nimport android.graphics.Paint;\r\nimport android.graphics.Rect;\r\nimport android.graphics.drawable.Drawable;\r\n\r\npublic class LetterDrawable extends Drawable {\r\n    private int mAlpha = 0;\r\n    private Paint mCirclePaint = new Paint();\r\n    private Paint mTextPaint = new Paint();\r\n    private String mText = \"null\";\r\n\r\n    public LetterDrawable(String str) {\r\n        initPaint();\r\n        mText = str;\r\n    }\r\n\r\n    public LetterDrawable(String str, int circleColor, int textColor) {\r\n        initPaint();\r\n        setColor(circleColor, textColor);\r\n        mText = str;\r\n    }\r\n\r\n    public void initPaint(){\r\n        mCirclePaint.setStrokeCap(Paint.Cap.SQUARE);\r\n        mCirclePaint.setStyle(Paint.Style.FILL);\r\n        mCirclePaint.setAntiAlias(true);\r\n        mCirclePaint.setColor( Color.BLUE);\r\n\r\n        mTextPaint.setStrokeCap(Paint.Cap.ROUND);\r\n        mTextPaint.setStrokeJoin(Paint.Join.ROUND);\r\n        mTextPaint.setStyle(Paint.Style.STROKE);\r\n        mTextPaint.setAntiAlias(true);\r\n        mTextPaint.setColor(Color.CYAN);\r\n        mTextPaint.setTextAlign(Paint.Align.CENTER);\r\n\r\n        //mTextPaint.setTextSize(700);\r\n\r\n//        mTextPaint\r\n    }\r\n\r\n\r\n    @Override\r\n    public void draw(Canvas canvas) {\r\n        final int saveCount = canvas.save();\r\n        Rect bounds = getBounds();\r\n        canvas.drawCircle(bounds.centerX(), bounds.centerY(), bounds.width()/2, mCirclePaint);\r\n\r\n        final int textSize = bounds.width()*2/3;\r\n        mTextPaint.setTextSize(textSize);\r\n        Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();\r\n        int baseline = (bounds.height() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;\r\n        canvas.drawText(mText, bounds.centerX(), baseline, mTextPaint);\r\n\r\n        canvas.restoreToCount(saveCount);\r\n    }\r\n\r\n    @Override\r\n    public void setAlpha(int alpha) {\r\n        mAlpha = alpha;\r\n    }\r\n\r\n    public void setCircleColor(int color) {\r\n        mCirclePaint.setColor(color);\r\n    }\r\n\r\n    public void setTextColor(int color) {\r\n        mTextPaint.setColor(color);\r\n    }\r\n\r\n    public void setColor(int circleColor, int textColor) {\r\n        mCirclePaint.setColor(circleColor);\r\n        mTextPaint.setColor(textColor);\r\n    }\r\n\r\n    @Override\r\n    public void setColorFilter(ColorFilter colorFilter) {\r\n        mCirclePaint.setColorFilter(colorFilter);\r\n    }\r\n\r\n    @Override\r\n    public int getOpacity() {\r\n        int i = 0;\r\n        return i;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/LetterDrawable.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/LetterDrawable.java	(date 1574235912349)
+@@ -6,7 +6,7 @@
+ import android.graphics.Paint;
+ import android.graphics.Rect;
+ import android.graphics.drawable.Drawable;
+-
++//设置页面的设置圆圈、圆圈内的文字、圆圈下的文字；
+ public class LetterDrawable extends Drawable {
+     private int mAlpha = 0;
+     private Paint mCirclePaint = new Paint();
+Index: .idea/codeStyles/codeStyleConfig.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/codeStyles/codeStyleConfig.xml	(date 1574417853033)
++++ .idea/codeStyles/codeStyleConfig.xml	(date 1574417853033)
+@@ -0,0 +1,5 @@
++<component name="ProjectCodeStyleConfiguration">
++  <state>
++    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
++  </state>
++</component>
+\ No newline at end of file
+Index: app/src/main/java/com/example/weige/UI/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport android.app.AppComponentFactory;\r\nimport android.content.Intent;\r\n\r\nimport android.content.SharedPreferences;\r\nimport android.os.Build;\r\nimport android.os.StrictMode;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.EditText;\r\n\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.alibaba.fastjson.JSONArray;\r\nimport com.alibaba.fastjson.JSONObject;\r\nimport com.google.android.material.snackbar.Snackbar;\r\nimport com.google.android.material.textfield.TextInputEditText;\r\nimport com.google.android.material.textfield.TextInputLayout;\r\n\r\nimport java.util.Objects;\r\n\r\nimport demo.BaseActivity;\r\nimport entity.Garbage;\r\nimport entity.User;\r\nimport okhttp3.Call;\r\nimport okhttp3.Callback;\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.Request;\r\nimport okhttp3.Response;\r\nimport okio.Buffer;\r\nimport url.APITOALIYUN;\r\nimport utils.L;\r\n\r\n//登录界面\r\npublic class LoginActivity extends AppCompatActivity implements View.OnClickListener {\r\n\r\n    String phone_client;\r\n    private TextInputEditText phone;\r\n    private TextInputEditText password;\r\n\r\n    private TextInputLayout phone_layout;\r\n    private Button button_login;\r\n    private Button button_register;\r\n    private CheckBox checkBox;\r\n    private SharedPreferences preferences;\r\n    private SharedPreferences.Editor editor;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n        setContentView(R.layout.activity_login);\r\n        /*解决android报错android.os.NetworkOnMainThreadException*/\r\n        //修改系统策略，放开所有的权限\r\n        //代码添加到onCreate回调方法中即可\r\n        if (android.os.Build.VERSION.SDK_INT > 9) {\r\n            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();\r\n            StrictMode.setThreadPolicy(policy);\r\n        }\r\n        initView();\r\n    }\r\n\r\n    private void initView() {\r\n\r\n        //记住密码复选框\r\n        checkBox=findViewById( R.id.checkbox );\r\n        button_register=findViewById(R.id.button_register);\r\n        button_login=findViewById( R.id.button_login );\r\n        preferences=getPreferences(MODE_PRIVATE);\r\n        //两个username/password输入框\r\n        phone=findViewById( R.id.text_input_re_id_login );\r\n        password=findViewById( R.id.text_input_password_login );\r\n        phone_layout=findViewById( R.id.text_input_layout_re_id_login );\r\n\r\n\r\n        button_register.setOnClickListener(this);\r\n        button_login.setOnClickListener( this );\r\n\r\n        //读取密码\r\n        boolean is_or_remember=preferences.getBoolean(\"checkbox\",false);\r\n        if (is_or_remember){\r\n            String id=preferences.getString(\"id\",\"\");\r\n            String pass=preferences.getString(\"password\",\"\");\r\n            phone.setText(id);\r\n            password.setText(pass);\r\n            checkBox.setChecked(true);\r\n            Log.i(\"receiver\",\"因为上一次选框被选中，账号密码被填写\");\r\n        }\r\n\r\n        //设计账号为11位数\r\n        //设置可以计数\r\n        phone_layout.setCounterEnabled(true);\r\n        //计数的最大值\r\n        phone_layout.setCounterMaxLength(11);\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onClick(final View v) {\r\n        switch (v.getId()){\r\n            case R.id.button_register:\r\n                startActivity( new Intent( this, RegisterActivity.class ) );\r\n                //实验先不去finish（）；\r\n                break;\r\n            case R.id.button_login:\r\n                String API_login= APITOALIYUN.IP_address_login+\"phone=\"+phone.getText().toString()+\"&\"+\"password=\"+password.getText().toString();\r\n                L.i( API_login );\r\n                OkHttpClient okHttpClient=new OkHttpClient();\r\n                Request.Builder builder=new Request.Builder();\r\n                Request request=builder.get().url(API_login).method( \"GET\",null ).build();\r\n                okhttp3.Call call=okHttpClient.newCall(request);\r\n                L.i(\"点击按钮\");\r\n                try {\r\n                    Response response=call.execute();\r\n                    assert response.body() != null;\r\n                    final String str = response.body().string();\r\n                    L.i( str );\r\n\r\n                    JSONObject jsonObject=JSONObject.parseObject( str );\r\n                    L.i( jsonObject.toJSONString() );\r\n                    L.i( String.valueOf( jsonObject.getInteger( \"code\" ) ) );\r\n                    if (Objects.equals( jsonObject.getInteger( \"code\" ), 200)) {\r\n                        L.i( \"登录成功\" );\r\n                        //存取密码\r\n                        //设置全局变量User_id\r\n                        JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( \"result\" ));\r\n                        JSONObject row = null;\r\n\r\n                        row = jsonArray.getJSONObject(0);\r\n                        APITOALIYUN.id=row.getInteger( \"id\" );\r\n\r\n                        String id=phone.getText().toString();\r\n                        String pass=password.getText().toString();\r\n                        editor = preferences.edit();\r\n                        if (checkBox.isChecked()) {\r\n                            editor.putBoolean( \"checkbox\",true );\r\n                            editor.putString( \"id\", id );\r\n                            editor.putString( \"password\", pass);\r\n                            L.i( \"选中复选框，保存了密码\" );\r\n                        } else {\r\n                            editor.clear();\r\n                            L.i(  \"没有选中复选框，没有保存密码\" );\r\n                        }\r\n                        editor.apply();\r\n                        Intent intent = new Intent( LoginActivity.this, MainActivity.class );\r\n                        startActivity( intent );\r\n                        finish();\r\n                    } else {\r\n                        Snackbar.make( v, \"账号密码错误，或者没有注册\", Snackbar.LENGTH_LONG ).show();\r\n                        L.i( \"登录失败\" );\r\n                    }\r\n                }catch (Exception e){\r\n                    e.printStackTrace();\r\n                }\r\n                break;\r\n            default:\r\n                break;\r\n        }\r\n    }\r\n\r\n    //点解忘记了密码\r\n    public void forget_password(View view) {\r\n\r\n        //跳转到修改密码界面\r\n        Intent intent=new Intent( LoginActivity.this,ForgetPassword.class );\r\n        startActivity( intent );\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/LoginActivity.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/LoginActivity.java	(date 1574413720333)
+@@ -1,21 +1,18 @@
+ package com.example.weige.UI;
+ 
+-import android.app.AppComponentFactory;
++
+ import android.content.Intent;
+ 
+ import android.content.SharedPreferences;
+-import android.os.Build;
++
+ import android.os.StrictMode;
+ 
+ import android.os.Bundle;
+ 
+-import android.text.Editable;
+-import android.text.TextWatcher;
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.CheckBox;
+-import android.widget.EditText;
+ 
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -28,15 +25,11 @@
+ 
+ import java.util.Objects;
+ 
+-import demo.BaseActivity;
+-import entity.Garbage;
+-import entity.User;
+-import okhttp3.Call;
+-import okhttp3.Callback;
++
+ import okhttp3.OkHttpClient;
+ import okhttp3.Request;
+ import okhttp3.Response;
+-import okio.Buffer;
++
+ import url.APITOALIYUN;
+ import utils.L;
+ 
+Index: app/src/main/java/com/example/weige/UI/videoview.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\n\r\nimport android.content.Intent;\r\nimport android.media.MediaPlayer;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\n\r\nimport android.view.View;\r\nimport android.view.Window;\r\nimport android.view.WindowManager;\r\nimport android.widget.Button;\r\nimport android.widget.VideoView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\nimport demo.CustomVideoView;\r\n\r\n\r\npublic class videoview extends AppCompatActivity {\r\n\r\n    public static videoview inst = null;\r\n    private Timer timer;\r\n    private TimerTask timerTask;\r\n    Handler handler;\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        inst = this;\r\n        // 全屏显示\r\n        requestWindowFeature(Window.FEATURE_NO_TITLE);\r\n        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,\r\n                WindowManager.LayoutParams.FLAG_FULLSCREEN);\r\n        setContentView(R.layout.activity_view_pager);\r\n        /*主要代码起始位置*/\r\n        final CustomVideoView vv = (CustomVideoView) this.findViewById(R.id.videoView);\r\n        final String uri = \"android.resource://\" + getPackageName() + \"/\" + R.drawable.logo;\r\n        vv.setVideoURI(Uri.parse(uri));\r\n        vv.start();\r\n        vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {\r\n\r\n\r\n            @Override\r\n            public void onPrepared(MediaPlayer mp) {\r\n                mp.start();\r\n                mp.setLooping(false);\r\n            }\r\n        });\r\n        vv.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {\r\n\r\n\r\n            @Override\r\n            public void onCompletion(MediaPlayer mp) {\r\n                Intent intent = new Intent(inst, MainActivity.class);\r\n                startActivity(intent);\r\n                inst.finish();\r\n\r\n            }\r\n\r\n        });\r\n        final Button button = (Button) findViewById(R.id.pass);\r\n        handler=new Handler();\r\n        timerTask = new TimerTask() {\r\n            @Override\r\n            public void run() {\r\n                button.setVisibility(View.VISIBLE);\r\n            }\r\n        };\r\n        handler.postDelayed(timerTask, 3000);\r\n\r\n        button.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent();\r\n                intent.setClass(videoview.this, MainActivity.class);\r\n                startActivity(intent);\r\n                videoview.this.finish();\r\n            }\r\n        });\r\n\r\n        /*主要代码结束位置*/\r\n\r\n    }\r\n\r\n    protected void onDestroy() {\r\n\r\n        //当Activity销毁的时候 终止计时器\r\n\r\n        timerTask.cancel();\r\n\r\n        super.onDestroy();\r\n\r\n\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/videoview.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/videoview.java	(date 1590983230853)
+@@ -6,12 +6,10 @@
+ import android.net.Uri;
+ import android.os.Bundle;
+ import android.os.Handler;
+-
+ import android.view.View;
+ import android.view.Window;
+ import android.view.WindowManager;
+ import android.widget.Button;
+-import android.widget.VideoView;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+@@ -20,7 +18,7 @@
+ 
+ import demo.CustomVideoView;
+ 
+-
++//闪屏页的视频播放
+ public class videoview extends AppCompatActivity {
+ 
+     public static videoview inst = null;
+Index: app/src/main/res/layout/cardview_for_bill.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.cardview.widget.CardView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    app:cardCornerRadius=\"8dp\"\r\n    app:cardBackgroundColor=\"@color/colorL\"\r\n    android:foreground = \"?attr/selectableItemBackground\"\r\n    android:layout_margin=\"10dp\"\r\n    android:layout_width=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_height=\"wrap_content\">\r\n\r\n    <LinearLayout\r\n        android:orientation=\"vertical\"\r\n        android:layout_margin=\"10dp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_marginTop=\"8dp\"\r\n            android:layout_marginBottom=\"8dp\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"5\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_weight=\"1\"\r\n                    android:src=\"@drawable/time_for_bill2\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/time_bill\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"8\"\r\n                    android:textColor=\"@color/colorText\"\r\n                    android:textSize=\"14sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </LinearLayout>\r\n\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/time_state\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_weight=\"1\"\r\n                android:layout_gravity=\"center_vertical\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:textColor=\"@color/colorText\"\r\n                android:textStyle=\"bold\"\r\n                android:textSize=\"17dp\"\r\n                />\r\n\r\n        </LinearLayout>\r\n        <Button\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"0.1dp\"\r\n            android:background=\"@color/colorText\"\r\n            />\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"16dp\"\r\n            android:layout_marginBottom=\"8dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_weight=\"1\"\r\n                android:src=\"@drawable/phone_for_bill2\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/phone_for_bill\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"10\"\r\n                android:textColor=\"@color/colorText\"\r\n                android:textSize=\"14sp\" />\r\n        </LinearLayout>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"8dp\"\r\n            android:layout_marginBottom=\"8dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_weight=\"1\"\r\n                android:src=\"@drawable/money_for_bill\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/price_for_bill\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"10\"\r\n                android:textColor=\"@color/colorText\"\r\n                android:textSize=\"14sp\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"8dp\"\r\n            android:layout_marginBottom=\"8dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_weight=\"1\"\r\n                android:src=\"@drawable/address_for_bill\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/address_for_bill\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"10\"\r\n                android:textColor=\"@color/colorText\"\r\n                android:textSize=\"14sp\"/>\r\n        </LinearLayout>\r\n\r\n        <Button\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"33dp\"\r\n            android:background=\"@drawable/demo_bg\"\r\n            android:text=\"@string/open\"\r\n            android:layout_gravity=\"right\"/>\r\n\r\n    </LinearLayout>\r\n\r\n\r\n\r\n</androidx.cardview.widget.CardView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/cardview_for_bill.xml	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/res/layout/cardview_for_bill.xml	(date 1574227163591)
+@@ -137,12 +137,30 @@
+                 android:textSize="14sp"/>
+         </LinearLayout>
+ 
+-        <Button
+-            android:layout_width="wrap_content"
+-            android:layout_height="33dp"
+-            android:background="@drawable/demo_bg"
+-            android:text="@string/open"
+-            android:layout_gravity="right"/>
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            android:gravity="right">
++            <Button
++                android:layout_width="wrap_content"
++                android:layout_height="33dp"
++                android:background="@drawable/demo_bg"
++                android:text="@string/update_bill"
++                android:layout_marginRight="15dp"
++                android:textColor="@color/colorPrimary"
++               />
++
++
++            <Button
++                android:id="@+id/see_all_bill_message"
++                android:layout_width="wrap_content"
++                android:layout_height="33dp"
++                android:background="@drawable/demo_bg"
++                android:text="@string/open"
++                />
++        </LinearLayout>
++
+ 
+     </LinearLayout>
+ 
+Index: app/src/main/java/com/example/weige/UI/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weige.UI;\r\n\r\nimport android.animation.Animator;\r\nimport android.animation.ObjectAnimator;\r\nimport android.animation.ValueAnimator;\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport android.util.Log;\r\nimport android.view.Gravity;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.view.animation.DecelerateInterpolator;\r\nimport android.widget.Button;\r\nimport android.widget.Toast;\r\n\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport androidx.core.view.MenuItemCompat;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentPagerAdapter;\r\n\r\nimport androidx.navigation.ui.AppBarConfiguration;\r\n\r\nimport androidx.viewpager.widget.ViewPager;\r\n\r\nimport com.alibaba.fastjson.JSONArray;\r\nimport com.alibaba.fastjson.JSONObject;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\n\r\nimport com.google.android.material.snackbar.Snackbar;\r\nimport com.google.android.material.tabs.TabLayout;\r\nimport com.onurkaganaldemir.ktoastlib.KToast;\r\nimport com.sdsmdg.tastytoast.TastyToast;\r\nimport entity.Garbage;\r\nimport fragment.DemoFragment01;\r\nimport fragment.DemoFragment02;\r\nimport fragment.DemoFragment03;\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.Request;\r\nimport okhttp3.Response;\r\nimport url.APITOALIYUN;\r\nimport utils.L;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport static com.google.android.material.snackbar.Snackbar.*;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity implements View.OnClickListener {\r\n\r\n    //搜索栏的返回list\r\n    private List<Garbage>searchlist=new ArrayList<>();\r\n    //搜索控件\r\n    androidx.appcompat.widget.SearchView searchView;\r\n\r\n    private AppBarConfiguration mAppBarConfiguration;\r\n\r\n    private DrawerLayout drawerLayout;\r\n    /*有用的*/\r\n    private TabLayout tabLayout;\r\n    private ViewPager viewPager;\r\n    private List<String>mTitles;\r\n    private List<Fragment>fragments;\r\n    private FloatingActionButton floatingActionButton;//悬浮窗\r\n    private Button button_to_add_bill;\r\n\r\n    //内部类,给设置\r\n    class ButtomListener implements Animator.AnimatorListener {\r\n        @SuppressLint(\"RestrictedApi\")\r\n        @Override\r\n        public void onAnimationStart(Animator animation) {\r\n\r\n        }\r\n        @SuppressLint(\"RestrictedApi\")\r\n        @Override\r\n        public void onAnimationEnd(Animator animation) {\r\n            Intent i = new Intent(MainActivity.this, SettingActivity.class);\r\n            startActivity(i);\r\n        }\r\n\r\n        @SuppressLint(\"RestrictedApi\")\r\n        @Override\r\n        public void onAnimationCancel(Animator animation) {\r\n\r\n        }\r\n\r\n        @SuppressLint(\"RestrictedApi\")\r\n        @Override\r\n        public void onAnimationRepeat(Animator animation) {\r\n        }\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.setTitle( \"丐帮\" );\r\n\r\n\r\n        //打印全局变量user_id\r\n        L.i( \"用户的编号位为:  \"+ APITOALIYUN.id  );\r\n        //除掉阴影\r\n        getSupportActionBar().setElevation(0);\r\n        initDate();\r\n        initView();\r\n\r\n    }\r\n\r\n    private void initView() {\r\n\r\n        //下单按钮\r\n        button_to_add_bill=findViewById( R.id.add_bill );\r\n        button_to_add_bill.setOnClickListener( this );\r\n        /*有用*/\r\n        tabLayout=findViewById( R.id.mTablayout);\r\n        viewPager=findViewById(R.id.myviewpager);\r\n\r\n        //浮窗\r\n        floatingActionButton=findViewById(R.id.fab_setting);\r\n        floatingActionButton.setOnClickListener(this);\r\n\r\n        viewPager.setOffscreenPageLimit(fragments.size());\r\n        //设置轮转的颜色\r\n        viewPager.setBackgroundResource( R.color.colorL );\r\n\r\n\r\n        //viewpager的监听，实现在服务管家的界面实现FloatingActionButton消失\r\n        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {\r\n            @Override\r\n            public void onPageScrolled(int i, float v, int i1) {\r\n\r\n            }\r\n\r\n            @SuppressLint(\"RestrictedApi\")\r\n            @Override\r\n            public void onPageSelected(int i) {\r\n                Log.i(\"TAG\",\"position\"+i);\r\n                 if (i==0||i==2) {\r\n                     button_to_add_bill.setVisibility( View.GONE );\r\n                     floatingActionButton.setVisibility(View.GONE);  //隐藏\r\n                 } else{\r\n                     floatingActionButton.setVisibility(View.VISIBLE);  //显示\r\n                     button_to_add_bill.setVisibility( View.VISIBLE );\r\n                 }\r\n            }\r\n\r\n            @Override\r\n            public void onPageScrollStateChanged(int i) {\r\n\r\n            }\r\n        });\r\n\r\n        //设置viewpaper滑动刷新\r\n        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {\r\n            @Override\r\n            public Fragment getItem(int i) {\r\n                return fragments.get(i);\r\n            }\r\n\r\n            @Override\r\n            public int getCount() {\r\n                return fragments.size();\r\n            }\r\n\r\n            @Nullable\r\n            @Override\r\n            public CharSequence getPageTitle(int position) {\r\n                return mTitles.get(position);\r\n            }\r\n        });\r\n\r\n\r\n        viewPager.setCurrentItem(1);//括号里的x变成你的默认页码\r\n        //TobLayout加入Viewpager\r\n        tabLayout.setupWithViewPager(viewPager);\r\n    }\r\n\r\n    private void initDate() {\r\n        mTitles=new ArrayList<>();\r\n        mTitles.add(\"分类\");\r\n        mTitles.add(\"个人\");\r\n        mTitles.add(\"订单\");\r\n\r\n        fragments=new ArrayList<>();\r\n        fragments.add(new DemoFragment01());\r\n        fragments.add(new DemoFragment02());\r\n        fragments.add(new DemoFragment03());\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onClick(View v) {\r\n        switch (v.getId()){\r\n            case R.id.fab_setting:\r\n               // startActivity(new Intent(this,SettingActivity.class));\r\n                //ValueAnimator anim = ObjectAnimator.ofFloat(v, \"translationY\", 0, v.getHeight()*2);\r\n                ValueAnimator anim = ObjectAnimator.ofFloat(v, \"translationY\", 0, 0);\r\n                anim.setDuration(200);\r\n                anim.setInterpolator(new DecelerateInterpolator());\r\n                anim.addListener(new ButtomListener());\r\n                anim.start();\r\n                break;\r\n            case R.id.add_bill:\r\n                startActivity( new Intent( this,ScrollingActivity.class ) );\r\n                finish();\r\n                break;\r\n        }\r\n    }\r\n\r\n    //设置搜索框\r\n    @Override\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n        //使用菜单填充器获取menu下的菜单资源文件\r\n        getMenuInflater().inflate( R.menu.menu,menu );\r\n        MenuItem menuItem = menu.findItem(R.id.app_bar_search);\r\n        searchView = (androidx.appcompat.widget.SearchView) MenuItemCompat.getActionView(menuItem);\r\n\r\n        //设置搜索的事件\r\n        searchView.setOnQueryTextListener( new androidx.appcompat.widget.SearchView.OnQueryTextListener() {\r\n            @Override\r\n            public boolean onQueryTextSubmit(String query) {\r\n                OkHttpClient okHttpClient_garbage=new OkHttpClient();\r\n                Request.Builder builder=new Request.Builder();\r\n                Request request=builder.get().url( APITOALIYUN.Garbage_API).method( \"GET\",null ).build();\r\n                okhttp3.Call call=okHttpClient_garbage.newCall(request);\r\n                try {\r\n                    Response response=call.execute();\r\n                    final String str_garbage = response.body().string();\r\n                    L.i( str_garbage );\r\n                    JSONObject jsonObject=JSONObject.parseObject( str_garbage );\r\n                    L.i(  jsonObject.getString( \"result\"));\r\n                    JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( \"result\" ));\r\n                    JSONObject row = null;\r\n                    //每次搜索都要删除之前结果\r\n                    searchlist.clear();\r\n                    for (int i = 0; i < jsonArray.size(); i++) {\r\n                        row = jsonArray.getJSONObject(i);\r\n                        Garbage garbage=new Garbage( row.getString( \"name\" ),row.getInteger( \"category\" ) );\r\n                        searchlist.add( garbage );\r\n                    }\r\n                    L.i( \"开始搜索\" );\r\n                    for (int j=0;j<searchlist.size();j++){\r\n                        Garbage garbage=searchlist.get( j );\r\n                        if (garbage.getName().equals( query )){\r\n                            Toast t;\r\n                            switch (garbage.getCategory()){\r\n                                case 1:\r\n//                                    t=Toast.makeText( MainActivity.this, query+\"是可回收垃圾\" ,Toast.LENGTH_SHORT);\r\n//                                    t.setGravity( Gravity.TOP,0,200);\r\n//                                    t.show();\r\n                                    TastyToast.makeText(getApplicationContext(),  query+\"是可回收垃圾\", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);\r\n                                    L.i( query+\"是可回收垃圾\" );\r\n                                    break;\r\n                                case 2:\r\n//                                    t=Toast.makeText( MainActivity.this, query+\"是有害垃圾\" ,Toast.LENGTH_SHORT);\r\n//                                    t.setGravity( Gravity.TOP,0,200);\r\n//                                    t.show();\r\n                                    TastyToast.makeText(getApplicationContext(),  query+\"是有害垃圾\", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);\r\n                                    L.i( query+\"有害垃圾\" );\r\n                                    break;\r\n                                case 4:\r\n//                                    t=Toast.makeText( MainActivity.this, query+\"是湿垃圾\" ,Toast.LENGTH_SHORT);\r\n//                                    t.setGravity( Gravity.TOP,0,200);\r\n//                                    t.show();\r\n                                    TastyToast.makeText(getApplicationContext(),  query+\"是湿垃圾\", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);\r\n                                    L.i( query+\"湿垃圾\" );\r\n                                    break;\r\n                                case 8:\r\n//                                    t=Toast.makeText( MainActivity.this, query+\"是干垃圾\" ,Toast.LENGTH_SHORT);\r\n//                                    t.setGravity( Gravity.TOP,0,200);\r\n//                                    t.show();\r\n//                                    L.i( query+\"干垃圾\" );\r\n                                    TastyToast.makeText(getApplicationContext(),  query+\"是干垃圾\", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);\r\n                                    break;\r\n                                case 16:\r\n//                                    t=Toast.makeText( MainActivity.this, query+\"是大件垃圾\" ,Toast.LENGTH_SHORT);\r\n//                                    t.setGravity( Gravity.TOP,0,200);\r\n//                                    t.show();\r\n                                    TastyToast.makeText(getApplicationContext(), query+\"是大件垃圾\", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);\r\n                                    L.i( query+\"大件垃圾\" );\r\n                                    break;\r\n                                default:\r\n                                    break;\r\n\r\n                            }\r\n                            break;\r\n\r\n                        }\r\n                        else {\r\n//                            Snackbar.make( MainActivity.this , \"搜不到你要的结果\", Snackbar.LENGTH_LONG ).show();\r\n//                            L.i( String.valueOf( garbage.getName().equals( query ) ) );\r\n\r\n\r\n                            if (j==(searchlist.size()-1)){\r\n//                                t=Toast.makeText( MainActivity.this, \"搜不到你要的结果\" ,Toast.LENGTH_SHORT);\r\n//                                t.setGravity( Gravity.TOP,0,200);\r\n//                                t.show();\r\n                                // Error\r\n//                                KToast.errorToast(MainActivity.this, \"搜不到你要的结果!\", Gravity.BOTTOM, KToast.LENGTH_AUTO);\r\n                                TastyToast.makeText(getApplicationContext(), \"搜不到你要的结果!\", TastyToast.LENGTH_LONG, TastyToast.WARNING);\r\n                            }\r\n                            L.i( \"list大小\"+searchlist.size()  );\r\n                        }\r\n\r\n\r\n                    }\r\n                }catch (Exception e){\r\n                    e.printStackTrace();\r\n                }\r\n                return false;\r\n            }\r\n\r\n            @Override\r\n            public boolean onQueryTextChange(String newText) {\r\n                return false;\r\n            }\r\n        } );\r\n\r\n        return true;\r\n    }\r\n\r\n    //标题栏上的快捷键\r\n    @Override\r\n    public boolean onOptionsItemSelected(MenuItem item) {\r\n        switch (item.getItemId()){\r\n            case R.id.share_item:\r\n                Toast.makeText(MainActivity.this,R.string.share,Toast.LENGTH_SHORT).show();\r\n                break;\r\n            case R.id.remove_item:\r\n                //Toast.makeText(MainActivity.this,R.string.item_id_out,Toast.LENGTH_SHORT).show();\r\n\r\n                Intent intent=new Intent( MainActivity.this,LoginActivity.class );\r\n                startActivity( intent );\r\n                finish();\r\n                break;\r\n\r\n            default:\r\n                break;\r\n        }\r\n        return true;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/weige/UI/MainActivity.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/com/example/weige/UI/MainActivity.java	(date 1575947138048)
+@@ -5,11 +5,8 @@
+ import android.animation.ValueAnimator;
+ import android.annotation.SuppressLint;
+ import android.content.Intent;
+-
+ import android.os.Bundle;
+-
+ import android.util.Log;
+-import android.view.Gravity;
+ import android.view.Menu;
+ import android.view.MenuItem;
+ import android.view.View;
+@@ -17,28 +14,25 @@
+ import android.widget.Button;
+ import android.widget.Toast;
+ 
+-
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.ActionBar;
+ import androidx.appcompat.app.AppCompatActivity;
+-
+ import androidx.core.view.MenuItemCompat;
+ import androidx.drawerlayout.widget.DrawerLayout;
+ import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.FragmentPagerAdapter;
+-
+ import androidx.navigation.ui.AppBarConfiguration;
+-
+ import androidx.viewpager.widget.ViewPager;
+ 
+ import com.alibaba.fastjson.JSONArray;
+ import com.alibaba.fastjson.JSONObject;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+-
+-import com.google.android.material.snackbar.Snackbar;
+ import com.google.android.material.tabs.TabLayout;
+-import com.onurkaganaldemir.ktoastlib.KToast;
+ import com.sdsmdg.tastytoast.TastyToast;
++
++import java.util.ArrayList;
++import java.util.List;
++
+ import entity.Garbage;
+ import fragment.DemoFragment01;
+ import fragment.DemoFragment02;
+@@ -49,11 +43,6 @@
+ import url.APITOALIYUN;
+ import utils.L;
+ 
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-import static com.google.android.material.snackbar.Snackbar.*;
+-
+ 
+ public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+ 
+@@ -230,94 +219,110 @@
+         searchView.setOnQueryTextListener( new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+             @Override
+             public boolean onQueryTextSubmit(String query) {
+-                OkHttpClient okHttpClient_garbage=new OkHttpClient();
+-                Request.Builder builder=new Request.Builder();
+-                Request request=builder.get().url( APITOALIYUN.Garbage_API).method( "GET",null ).build();
+-                okhttp3.Call call=okHttpClient_garbage.newCall(request);
+-                try {
+-                    Response response=call.execute();
+-                    final String str_garbage = response.body().string();
+-                    L.i( str_garbage );
+-                    JSONObject jsonObject=JSONObject.parseObject( str_garbage );
+-                    L.i(  jsonObject.getString( "result"));
+-                    JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
+-                    JSONObject row = null;
+-                    //每次搜索都要删除之前结果
+-                    searchlist.clear();
+-                    for (int i = 0; i < jsonArray.size(); i++) {
+-                        row = jsonArray.getJSONObject(i);
+-                        Garbage garbage=new Garbage( row.getString( "name" ),row.getInteger( "category" ) );
+-                        searchlist.add( garbage );
+-                    }
+-                    L.i( "开始搜索" );
+-                    for (int j=0;j<searchlist.size();j++){
+-                        Garbage garbage=searchlist.get( j );
+-                        if (garbage.getName().equals( query )){
+-                            Toast t;
+-                            switch (garbage.getCategory()){
+-                                case 1:
+-//                                    t=Toast.makeText( MainActivity.this, query+"是可回收垃圾" ,Toast.LENGTH_SHORT);
+-//                                    t.setGravity( Gravity.TOP,0,200);
+-//                                    t.show();
+-                                    TastyToast.makeText(getApplicationContext(),  query+"是可回收垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+-                                    L.i( query+"是可回收垃圾" );
+-                                    break;
+-                                case 2:
+-//                                    t=Toast.makeText( MainActivity.this, query+"是有害垃圾" ,Toast.LENGTH_SHORT);
+-//                                    t.setGravity( Gravity.TOP,0,200);
+-//                                    t.show();
+-                                    TastyToast.makeText(getApplicationContext(),  query+"是有害垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+-                                    L.i( query+"有害垃圾" );
+-                                    break;
+-                                case 4:
+-//                                    t=Toast.makeText( MainActivity.this, query+"是湿垃圾" ,Toast.LENGTH_SHORT);
+-//                                    t.setGravity( Gravity.TOP,0,200);
+-//                                    t.show();
+-                                    TastyToast.makeText(getApplicationContext(),  query+"是湿垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+-                                    L.i( query+"湿垃圾" );
+-                                    break;
+-                                case 8:
+-//                                    t=Toast.makeText( MainActivity.this, query+"是干垃圾" ,Toast.LENGTH_SHORT);
+-//                                    t.setGravity( Gravity.TOP,0,200);
+-//                                    t.show();
+-//                                    L.i( query+"干垃圾" );
+-                                    TastyToast.makeText(getApplicationContext(),  query+"是干垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+-                                    break;
+-                                case 16:
+-//                                    t=Toast.makeText( MainActivity.this, query+"是大件垃圾" ,Toast.LENGTH_SHORT);
+-//                                    t.setGravity( Gravity.TOP,0,200);
+-//                                    t.show();
+-                                    TastyToast.makeText(getApplicationContext(), query+"是大件垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+-                                    L.i( query+"大件垃圾" );
+-                                    break;
+-                                default:
+-                                    break;
++                new Thread( new Runnable() {
++                    @Override
++                    public void run() {
++                        OkHttpClient okHttpClient_garbage=new OkHttpClient();
++                        Request.Builder builder=new Request.Builder();
++                        Request request=builder.get().url( APITOALIYUN.Garbage_API).method( "GET",null ).build();
++                        okhttp3.Call call=okHttpClient_garbage.newCall(request);
++                        try {
++                            Response response=call.execute();
++                            final String str_garbage = response.body().string();
++                            L.i( str_garbage );
++                            JSONObject jsonObject=JSONObject.parseObject( str_garbage );
++                            L.i(  jsonObject.getString( "result"));
++                            JSONArray jsonArray = (JSONArray) JSONArray.parse(jsonObject.getString( "result" ));
++                            JSONObject row = null;
++                            //每次搜索都要删除之前结果
++                            searchlist.clear();
++                            for (int i = 0; i < jsonArray.size(); i++) {
++                                row = jsonArray.getJSONObject(i);
++                                Garbage garbage=new Garbage( row.getString( "name" ),row.getInteger( "category" ) );
++                                searchlist.add( garbage );
++                            }
++                            L.i( "开始搜索" );
++
++                            //顺序查询
++                            for (int j=0;j<searchlist.size();j++){
++                                Garbage garbage=searchlist.get( j );
++                                if (garbage.getName().equals( query )){
++                                    Toast t;
++                                    switch (garbage.getCategory()){
++                                        case 1:
++                                            runOnUiThread( new Runnable() {
++                                                @Override
++                                                public void run() {
++                                                    TastyToast.makeText(getApplicationContext(),  query+"是可回收垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
++                                                }
++                                            } );
++                                            L.i( query+"是可回收垃圾" );
++                                            break;
++                                        case 2:
++                                            runOnUiThread( new Runnable() {
++                                                @Override
++                                                public void run() {
++                                                    TastyToast.makeText(getApplicationContext(),  query+"是有害垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
++                                                }
++                                            } );
++                                            L.i( query+"有害垃圾" );
++                                            break;
++                                        case 4:
++                                            runOnUiThread( new Runnable() {
++                                                @Override
++                                                public void run() {
++                                                    TastyToast.makeText(getApplicationContext(),  query+"是湿垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
++                                                }
++                                            } );
++                                            L.i( query+"湿垃圾" );
++                                            break;
++                                        case 8:
++                                            runOnUiThread( new Runnable() {
++                                                @Override
++                                                public void run() {
++                                                    TastyToast.makeText(getApplicationContext(),  query+"是干垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
++                                                }
++                                            } );
++                                            L.i( query+"是干垃圾" );
++                                            break;
++                                        case 16:
++                                            runOnUiThread( new Runnable() {
++                                                @Override
++                                                public void run() {
++                                                    TastyToast.makeText(getApplicationContext(), query+"是大件垃圾", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
++                                                }
++                                            } );
++
++                                            L.i( query+"大件垃圾" );
++                                            break;
++                                        default:
++                                            break;
+ 
+-                            }
+-                            break;
++                                    }
++                                    break;
+ 
+-                        }
+-                        else {
+-//                            Snackbar.make( MainActivity.this , "搜不到你要的结果", Snackbar.LENGTH_LONG ).show();
+-//                            L.i( String.valueOf( garbage.getName().equals( query ) ) );
++                                }
++                                else {
++                                    int finalJ = j;
++                                    runOnUiThread( new Runnable() {
++                                        @Override
++                                        public void run() {
++                                            if (finalJ ==(searchlist.size()-1)){
+ 
+-
+-                            if (j==(searchlist.size()-1)){
+-//                                t=Toast.makeText( MainActivity.this, "搜不到你要的结果" ,Toast.LENGTH_SHORT);
+-//                                t.setGravity( Gravity.TOP,0,200);
+-//                                t.show();
+-                                // Error
+-//                                KToast.errorToast(MainActivity.this, "搜不到你要的结果!", Gravity.BOTTOM, KToast.LENGTH_AUTO);
+-                                TastyToast.makeText(getApplicationContext(), "搜不到你要的结果!", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+-                            }
+-                            L.i( "list大小"+searchlist.size()  );
+-                        }
++                                                TastyToast.makeText(getApplicationContext(), "搜不到你要的结果!", TastyToast.LENGTH_LONG, TastyToast.WARNING);
++                                            }
++                                        }
++                                    } );
++                                    L.i( "list大小"+searchlist.size()  );
++                                }
+ 
+ 
+-                    }
+-                }catch (Exception e){
+-                    e.printStackTrace();
+-                }
++                            }
++                        }catch (Exception e){
++                            e.printStackTrace();
++                        }
++                    }
++                } ).start();
+                 return false;
+             }
+ 
+@@ -338,8 +343,6 @@
+                 Toast.makeText(MainActivity.this,R.string.share,Toast.LENGTH_SHORT).show();
+                 break;
+             case R.id.remove_item:
+-                //Toast.makeText(MainActivity.this,R.string.item_id_out,Toast.LENGTH_SHORT).show();
+-
+                 Intent intent=new Intent( MainActivity.this,LoginActivity.class );
+                 startActivity( intent );
+                 finish();
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <compositeConfiguration>\r\n          <compositeBuild compositeDefinitionSource=\"SCRIPT\" />\r\n        </compositeConfiguration>\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ .idea/gradle.xml	(date 1606031977650)
+@@ -1,12 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <compositeConfiguration>
+-          <compositeBuild compositeDefinitionSource="SCRIPT" />
+-        </compositeConfiguration>
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
++        <option name="delegatedBuild" value="false" />
++        <option name="testRunner" value="PLATFORM" />
++        <option name="distributionType" value="LOCAL" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="modules">
+           <set>
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: app/src/main/java/adapter/CardviewForbillAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package adapter;\r\n\r\nimport android.content.Context;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.weige.UI.R;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.List;\r\n\r\nimport entity.Bill;\r\n\r\npublic class CardviewForbillAdapter extends RecyclerView.Adapter<CardviewForbillAdapter.ViewHolder> {\r\n    private Context context;\r\n    private List<Bill>list;\r\n\r\n    static class ViewHolder extends RecyclerView.ViewHolder{\r\n\r\n        CardView cardView;\r\n        TextView textView_time_state;\r\n        TextView textView_date;\r\n        TextView phone_for_bill;\r\n        TextView price_for_bill;\r\n        TextView address_for_bill;\r\n        public ViewHolder(@NonNull View itemView) {\r\n            super( itemView );\r\n            cardView= (CardView) itemView;\r\n            textView_date=itemView.findViewById( R.id.time_bill );\r\n            textView_time_state=itemView.findViewById( R.id.time_state );\r\n\r\n            phone_for_bill=itemView.findViewById( R.id.phone_for_bill );\r\n            price_for_bill=itemView.findViewById( R.id.price_for_bill );\r\n            address_for_bill=itemView.findViewById( R.id.address_for_bill );\r\n        }\r\n    }\r\n    //构造方法\r\n    public CardviewForbillAdapter (List<Bill> list_a){\r\n        this.list=list_a;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {\r\n        if(context==null){\r\n            context=viewGroup.getContext();\r\n        }\r\n        View view= LayoutInflater.from( context ).inflate( R.layout.cardview_for_bill,viewGroup,false );\r\n        return new ViewHolder( view );\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {\r\n\r\n        Bill bill=list.get( i );\r\n        viewHolder.phone_for_bill.setText( \"下单手机号码：\"+bill.getPhone() );\r\n        viewHolder.price_for_bill.setText( \"下单费用：\"+ bill.getPrice() );\r\n        viewHolder.textView_time_state.setText( bill.getState() );\r\n        viewHolder.address_for_bill.setText( \"下单地址：\"+ bill.getBill_address());\r\n        String time=new SimpleDateFormat( \"yyyy-MM-dd    HH:mm:ss\" ).format( bill.getDate() );\r\n        viewHolder.textView_date.setText(\"下单时间：\"+time);\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return list.size();\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/adapter/CardviewForbillAdapter.java	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/java/adapter/CardviewForbillAdapter.java	(date 1590983230901)
+@@ -1,17 +1,21 @@
+ package adapter;
+ 
++import android.app.Activity;
+ import android.content.Context;
+-
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.Button;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
+ import androidx.cardview.widget.CardView;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import com.example.weige.UI.R;
++import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
++import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
+ 
+ import java.text.SimpleDateFormat;
+ import java.util.List;
+@@ -30,6 +34,7 @@
+         TextView phone_for_bill;
+         TextView price_for_bill;
+         TextView address_for_bill;
++        Button button_to_see_all_bill;
+         public ViewHolder(@NonNull View itemView) {
+             super( itemView );
+             cardView= (CardView) itemView;
+@@ -39,6 +44,7 @@
+             phone_for_bill=itemView.findViewById( R.id.phone_for_bill );
+             price_for_bill=itemView.findViewById( R.id.price_for_bill );
+             address_for_bill=itemView.findViewById( R.id.address_for_bill );
++            button_to_see_all_bill=itemView.findViewById( R.id.see_all_bill_message );
+         }
+     }
+     //构造方法
+@@ -53,7 +59,51 @@
+             context=viewGroup.getContext();
+         }
+         View view= LayoutInflater.from( context ).inflate( R.layout.cardview_for_bill,viewGroup,false );
+-        return new ViewHolder( view );
++        //测试
++        final  ViewHolder holder =new ViewHolder( view );
++
++        //对查看订单所有信息设置监听事件
++        holder.button_to_see_all_bill.setOnClickListener( new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                int p=holder.getAdapterPosition();
++                Bill bill=list.get( p );
++
++                new FancyGifDialog.Builder( (Activity) context )
++                        .setTitle("Granny eating chocolate dialog box")
++//                        .setMessage("This is a granny eating chocolate dialog box. This library is used to help you easily create fancy gify dialog.")
++
++                        .setMessage( "订单地址："+bill.getBill_address()
++                                +'\n' +'\n'+"订单电话："+bill.getPhone()
++                                +'\n' +'\n'+"下单时间："+new SimpleDateFormat( "yyyy-MM-dd    HH:mm:ss" ).format(bill.getDate() )
++                                +'\n' +'\n'+"订单价格："+bill.getPrice()
++                                +'\n' +'\n'+"垃圾回收返款："+bill.getPrice_forcustomer()
++                                +'\n' +'\n'+"回收总部：华广c19"+bill.getHeadquarters()
++                        )
++                        .setNegativeBtnText("投诉")
++                        .setPositiveBtnBackground("#FF4081")
++                        .setPositiveBtnText("退下")
++                        .setNegativeBtnBackground("#FFA9A7A8")
++                        .setGifResource(R.drawable.gif1)   //Pass your Gif here
++                        .isCancellable(true)
++                        .OnPositiveClicked(new FancyGifDialogListener() {
++                            @Override
++                            public void OnClick() {
++                                //退下按钮监听事件
++//                                Toast.makeText(context,"Ok",Toast.LENGTH_SHORT).show();
++                            }
++                        })
++                        .OnNegativeClicked(new FancyGifDialogListener() {
++                            @Override
++                            public void OnClick() {
++                                //投诉按钮监听事件
++                                Toast.makeText(context,"投诉",Toast.LENGTH_SHORT).show();
++                            }
++                        })
++                        .build();
++            }
++        } );
++        return holder;
+     }
+ 
+     @Override
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name_xian\" translatable=\"false\">丐帮</string>\r\n    <string name=\"Stringshanping\" translatable=\"false\">赚小费，上丐帮APP</string>\r\n    <string name=\"intomain\" translatable=\"false\">进入主页</string>\r\n    <string name=\"into\" translatable=\"false\">into</string>\r\n    <string name=\"know_sex\" translatable=\"false\">记住密码</string>\r\n    <string name=\"rest\" translatable=\"false\">注册成功</string>\r\n    <string name=\"item_id_out\" translatable=\"false\">登出</string>\r\n    <string name=\"item_id_in\" translatable=\"false\">登录</string>\r\n    <string name=\"user\" translatable=\"false\">电话</string>\r\n    <string name=\"password\" translatable=\"false\">密码</string>\r\n    <string name=\"Success\" translatable=\"false\">login success</string>\r\n    <string name=\"time\" translatable=\"false\">2019.1.1  19:00:00</string>\r\n    <string name=\"out_state\" translatable=\"false\">已完成</string>\r\n    <string name=\"confirm\" translatable=\"false\">确认</string>\r\n    <string name=\"register\" translatable=\"false\">注册</string>\r\n    <string name=\"phone\" translatable=\"false\">手机号</string>\r\n    <string name=\"forget\" translatable=\"false\">忘记密码？</string>\r\n    <string name=\"switch_login\" translatable=\"false\">Switch</string>\r\n    <string name=\"share\" translatable=\"false\">分享</string>\r\n    <string name=\"search\" translatable=\"false\">搜索</string>\r\n    <string name=\"myself\" translatable=\"false\">个人</string>\r\n    <string name=\"test\" translatable=\"false\">测试</string>\r\n\r\n\r\n    <string name=\"sure\" translatable=\"false\">确定</string>\r\n    <string name=\"title_activity_scrolling\" translatable=\"false\" >下单页面</string>\r\n\r\n    <string name=\"action_settings\" translatable=\"false\">Settings</string>\r\n    <string name=\"addbill\" translatable=\"false\">下单</string>\r\n    <string name=\"address\" translatable=\"false\">地址</string>\r\n    <string name=\"add_address_by\" translatable=\"false\">定位</string>\r\n    <string name=\"message\" translatable=\"false\">备注</string>\r\n    <string name=\"money\" translatable=\"false\">基础服务费用：50元</string>\r\n    <string name=\"start\" translatable=\"false\">开始体验</string>\r\n    <string name=\"hello_there\" translatable=\"false\">Hello Human</string>\r\n    <string name=\"open\" translatable=\"false\">SEE ALL</string>\r\n    <string name=\"title\">标题</string>\r\n    <string name=\"item\">金山银山不如绿水青山</string>\r\n\r\n</resources>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 5b3e5147c52245229047e5c87b1152275a7cc943)
++++ app/src/main/res/values/strings.xml	(date 1574227021405)
+@@ -34,8 +34,9 @@
+     <string name="money" translatable="false">基础服务费用：50元</string>
+     <string name="start" translatable="false">开始体验</string>
+     <string name="hello_there" translatable="false">Hello Human</string>
+-    <string name="open" translatable="false">SEE ALL</string>
+-    <string name="title">标题</string>
+-    <string name="item">金山银山不如绿水青山</string>
++    <string name="open" translatable="false">查看所有</string>
++    <string name="title" translatable="false">标题</string>
++    <string name="item" translatable="false">金山银山不如绿水青山</string>
++    <string name="update_bill" translatable="false">取消订单</string>
+ 
+ </resources>
